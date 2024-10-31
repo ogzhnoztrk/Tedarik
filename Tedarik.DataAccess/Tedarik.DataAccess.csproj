@@ -11,12 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Abstracts\" />
-    <Folder Include="Repositories\Concrete\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Tedarik.Core\Tedarik.Core.csproj" />
+    <ProjectReference Include="..\Tedarik.Entities\Tedarik.Entities.csproj" />
   </ItemGroup>
 
 </Project>

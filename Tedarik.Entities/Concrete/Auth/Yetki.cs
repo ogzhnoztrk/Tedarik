@@ -29,8 +29,7 @@ namespace Tedarik.Entities.Concrete.Auth
         [AllowNull]
         public Kullanici? Kullanici { get; set; }
 
-        [Column("ytki_var_mi")]
-        public bool YetkiVarMi { get; set; }
+      
 
     }
 }

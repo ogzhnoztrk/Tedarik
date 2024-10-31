@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tedarik.Core\Tedarik.Core.csproj" />
+    <ProjectReference Include="..\Tedarik.DataAccess\Tedarik.DataAccess.csproj" />
+    <ProjectReference Include="..\Tedarik.Entities\Tedarik.Entities.csproj" />
+    <ProjectReference Include="..\Tedarik.Models\Tedarik.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.5.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
 </Project>
