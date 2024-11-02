@@ -33,6 +33,7 @@ namespace Tedarik.Web.Controllers.Account
 
             return View();
         }
+
         [HttpPost]
         public IActionResult Login(KullaniciGirisVm kullaniciGirisVm)
         {

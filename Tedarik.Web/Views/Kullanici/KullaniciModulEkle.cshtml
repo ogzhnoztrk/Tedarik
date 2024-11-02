@@ -1,0 +1,133 @@
+﻿@using Tedarik.Models.VMs
+
+@model ModulEkleVM
+@{
+    ViewData["Title"] = "KullaniciEkle";
+    Layout = "~/Views/Shared/_TedarikLayout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <h3>Kullanıcı Modul Tanımlama</h3>
+    <hr />
+    <div class="col-lg-12">
+        <input value="@Model.KullaniciId" hidden />
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Modul No</th>
+                    <th>Modul Adı</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+        </table>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button id="ekleButton" class="btn btn-success " onclick="ekleClick()">@(Model.ModulVarMi! ? "Güncelle" : "Ekle")</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    let table;
+    $(document).ready(function () {
+        loadTable();
+    });
+
+    function loadTable() {
+        var veri = @Html.Raw(Json.Serialize(Model))
+            table = $('#myTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/tr.json'
+                },
+                paging: false,
+
+                data: veri.moduller,
+                responsive: true,
+                select: true,
+                columns: [
+                    { "data": "modulNo", className: 'text-start' },
+                    { "data": "modulAdi", className: 'text-start' },
+
+                    {
+                        "data": "id",
+                        "render": function (data, type, row) {
+
+
+
+                            return `
+                                                            <div class="w-75 btn-group" role="group">
+                                                                       <input class="form-check-input" type="checkbox" id="${data}" value="${data}" aria-label="...">
+                                                            </div>`;
+                        },
+                        "width": "20%"
+                    },
+                ],
+                initComplete: function () {
+                    check_boxes();
+                }
+
+            });
+
+    }
+
+    function ekleClick() {
+        $("#ekleButton").click(function (e) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked'); // Seçili olan checkboxları bulur
+            const values = Array.from(checkboxes).map(cb => cb.value); // Her checkboxın value değerini bir array'e toplar
+
+            // Form verilerini al
+            var moduller = []; // Modül listesi
+
+            var kullaniciEkleVm = {
+                Moduller: moduller,
+                KullaniciId: "@Model.KullaniciId",
+                ModulIdListe: values, // Örnek ID'ler
+                ModulVarMi: true // Checkbox kontrolü
+            };
+
+            // AJAX POST isteği
+            $.ajax({
+                type: "POST",
+                url: "/kullanici/KullaniciModulEkle",
+                contentType: "application/json; charset=utf-8",
+
+                data: JSON.stringify(kullaniciEkleVm),
+                dataType: "json",
+
+            }).done(function (response) {
+                if (response.statusCode == 201) {
+                    location.href = '@Url.Content("~/Kullanici/index/")';
+
+                } else {
+                    alert(response.message);
+                }
+            });
+        });
+
+
+    };
+
+    function check_boxes() {
+        // debugger;
+        var yetkiler = @Html.Raw(Json.Serialize(Model.Yetkiler))
+
+            yetkiler.forEach(yetki => {
+                const checkbox = document.getElementById(yetki.modulId);
+
+                if (checkbox) {
+                    checkbox.checked = true;// Checkbox'ı işaretle
+                }
+            });
+
+
+    }
+
+</script>

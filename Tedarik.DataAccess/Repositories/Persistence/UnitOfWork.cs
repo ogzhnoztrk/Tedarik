@@ -9,7 +9,7 @@ using Tedarik.DataAccess.Repositories.Concrete;
 
 namespace Tedarik.DataAccess.Repositories.Persistence
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly SqlDbContext _db;
         public UnitOfWork(SqlDbContext db)

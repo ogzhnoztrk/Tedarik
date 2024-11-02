@@ -1,0 +1,89 @@
+﻿@using Tedarik.Entities.Concrete.Auth
+@model List<Modul>
+@{
+    ViewData["Title"] = "Modul";
+    Layout = "~/Views/Shared/_TedarikLayout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+
+
+            <!--İlişkili İşlemler-->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+                        İlişkili İşlemler
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+                            <li class="list-group-item btn btn-secondary text-start" type="button"><a class="nav-link text-dark" asp-area="" asp-controller="Modul" asp-action="ModulUpsert"><i class="fa-solid fa-plus"></i>&nbsp;Modul Ekle</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Modul Numarası</th>
+                    <th>Modul Adı</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    let table;
+    $(document).ready(function () {
+        loadTable();
+    });
+
+    function loadTable() {
+        var veri = @Html.Raw(Json.Serialize(Model));
+        debugger;
+        table = $('#myTable').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/tr.json'
+            },
+            data: veri,
+            responsive: true,
+            columns: [
+                { "data": "modulNo", className: 'text-start' },
+                { "data": "modulAdi", className: 'text-start' },
+
+                {
+                    "data": "id",
+                    "render": function (data, type, row) {
+
+                        return `
+                                        <div class="w-75 btn-group" role="group">
+
+                                                        <a  class="btn btn-secondary mx-2" href="/Kullanici/KullaniciRolEkle?id=${data}"><i class="bi bi-trash"></i>Roller</a>
+                                        </div>`;
+                    },
+                    "width": "20%"
+                },
+            ],
+        })
+    }
+
+
+
+</script>

@@ -1,0 +1,445 @@
+﻿@using Tedarik.Entities.Concrete.Auth
+
+@model List<Kullanici>
+@{
+    ViewData["Title"] = "KullaniciEkle";
+    Layout = "~/Views/Shared/_TedarikLayout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+
+
+            <!--Dışa Aktar-->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Dışa Aktar
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+                            <li class="list-group-item btn btn-secondary text-start" type="button"><i class="fa-solid fa-print"></i> Yazdır </li>
+                            <li class="list-group-item btn btn-secondary text-start" type="button"><i class="fa-solid fa-file-pdf"></i> Pdf Oluştur </li>
+                            <li class="list-group-item btn btn-secondary text-start" type="button"><i class="fa-regular fa-file-excel"></i> Excel Oluştur </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--İlişkili İşlemler-->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+                        Kullanıcı İşlemleri
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+                            <li class="list-group-item btn btn-secondary text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#Ekleme" aria-controls="Ekleme"><i class="fa-solid fa-plus"></i>&nbsp;Kullanici Ekle</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                   
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>E-Posta</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+</div>
+
+
+
+<!--Ekleme Modal-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="Ekleme" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Kullanici Ekle</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="eklemeClose"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <div class="container">
+
+            <!--Adi Soyadi-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group  ">
+                        <div class="">
+                            <label for="kullaniciAdi" class="form-label">Adi</label>
+                            <input type="text" id="kullaniciAdi" class="form-control" value="" required>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group ">
+                        <div class=" ">
+                            <label for="kullaniciSoyadi" class="form-label">Soyadi</label>
+                            <input type="text" id="kullaniciSoyadi" class="form-control" value="" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Sicil Eposta-->
+            <div class="row">
+                @* <div class="col-md-6">
+                    <div class="input-group  ">
+                        <div class="">
+                            <label for="sicilNo" class="form-label">Sicil No</label>
+                            <input type="text" id="sicilNo" class="form-control" value="" required>
+                        </div>
+                    </div>
+                </div> *@
+                <div class="col-md-6">
+                    <div class="input-group ">
+                        <div class=" ">
+                            <label for="eposta" class="form-label">Eposta</label>
+                            <input type="email" id="eposta" class="form-control" value="" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Adres-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group  " style="display: block;">
+                        <div class="">
+                            <label for="adres" class="form-label">Adres</label>
+                            <textarea type="text" id="adres" class="form-control" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Şifre-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group  " style="display: block;">
+                        <div class="">
+                            <label for="Sifre" class="form-label">Sifre</label>
+                            <input type="password" id="Sifre" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br />
+            <div style="display: flex;justify-content: flex-end;">
+                <button onclick=save() class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Guncelleme Modal-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="guncelle" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Kullanici Güncelle</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="guncellemeClose"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <div class="container">
+
+            <!--Adi Soyadi-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group  ">
+                        <div class="">
+                            <label for="kullaniciAdiUpdate" class="form-label">Adi</label>
+                            <input type="text" id="kullaniciAdiUpdate" class="form-control" value="" required>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group ">
+                        <div class=" ">
+                            <label for="kullaniciSoyadiUpdate" class="form-label">Soyadi</label>
+                            <input type="text" id="kullaniciSoyadiUpdate" class="form-control" value="" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Sicil Eposta-->
+            <div class="row">
+               @*  <div class="col-md-6">
+                    <div class="input-group  ">
+                        <div class="">
+                            <label for="sicilNoUpdate" class="form-label">Sicil No</label>
+                            <input type="text" id="sicilNoUpdate" class="form-control" value="" required>
+                        </div>
+                    </div>
+                </div> *@
+                <div class="col-md-6">
+                    <div class="input-group ">
+                        <div class=" ">
+                            <label for="epostaUpdate" class="form-label">Eposta</label>
+                            <input type="email" id="epostaUpdate" class="form-control" value="" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Adres-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group  " style="display: block;">
+                        <div class="">
+                            <label for="adresUpdate" class="form-label">Adres</label>
+                            <textarea type="text" id="adresUpdate" class="form-control" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="personelMi" value="">
+                <label class="form-check-label" for="personelMi">Personel Mi?</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="kullaniciMi" value="option2">
+                <label class="form-check-label" for="kullaniciMi">Kullanıcı Mi?</label>
+            </div>
+
+
+
+            <br />
+            <div style="display: flex;justify-content: flex-end;">
+                <button onclick=update() class="btn btn-warning">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    let table;
+    $(document).ready(function () {
+        loadTable();
+    });
+
+    function loadTable() {
+        //var veri = @Html.Raw(Json.Serialize(Model));
+
+        table = $('#myTable').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/tr.json'
+            },
+            ajax: "https://localhost:44323/api/Kullanici",
+            responsive: true,
+            columns: [
+                // { "data": "kullaniciSicilNo", className: 'text-start' },
+                { "data": "kullaniciAdi", className: 'text-start' },
+                { "data": "kullaniciSoyadi", className: 'text-start' },
+                { "data": "kullaniciPosta", className: 'text-start' },
+                {
+                    "data": "id",
+                    "render": function (data, type, row) {
+                        // Her satırın "aktifMi" alanına erişiyoruz
+                        var btn_text, btn_color, sicilNo;
+
+                        if (row.aktifMi) {
+                            btn_text = "Aktif";
+                            btn_color = "success";
+                        } else {
+                            btn_text = "Pasif";
+                            btn_color = "danger";
+                        }
+                        return `
+                                    <div class="w-75 btn-group" role="group">
+                                                <a onClick=getById("${data}") class="btn btn-primary mx-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#guncelle" aria-controls="guncelle">Edit</a>
+                                            <a onClick=remove("${data}") class="btn btn-${btn_color} mx-2"><i class="bi bi-trash"></i>${btn_text}</a>
+                                                        <a  class="btn btn-secondary mx-2" href="/Kullanici/KullaniciModulEkle?id=${data}"><i class="bi bi-trash"></i>Roller</a>
+                                    </div>`;
+                    },
+                    "width": "20%"
+                },
+            ],
+
+            // layout: {
+            //     bottomStart: {
+            //         buttons: [
+            //             {
+
+            //                 extend: 'pdf',
+            //                 text: 'Pdf',
+            //                 exportOptions: {
+            //                     modifier: {
+            //                         page: 'current'
+            //                     }
+            //                 },
+            //                 title: 'Ürünler',
+            //                 className: 'btn btn-success',
+            //             }
+            //         ],
+            //     }
+            // },
+        })
+    }
+
+    function save() {
+        var kullaniciAdi = $("#kullaniciAdi").val();
+        var kullaniciSoyadi = $("#kullaniciSoyadi").val();
+        // var sicilNo = $("#sicilNo").val();
+        var eposta = $("#eposta").val();
+        var adres = $("#adres").val();
+        var Sifre = $("#Sifre").val();
+
+        $.ajax({
+            url: 'https://localhost:44323/api/Auth',
+            crossDomain: true,
+            method: 'post',
+            headers: {
+                'accept': 'text/plain'
+            },
+            contentType: 'application/json',
+            // data: '{\n  "adi": "string",\n  "soyadi": "string",\n  "sicilNo": "string",\n  "eposta": "string",\n  "adres": "string",\n  "sifre": "string"\n}',
+            data: JSON.stringify({
+                'adi': kullaniciAdi,
+                'soyadi': kullaniciSoyadi,
+                // 'sicilNo': sicilNo,
+                'eposta': eposta,
+                'adres': adres,
+                'sifre': Sifre
+            })
+        }).done(function (response) {
+            if (response.statusCode == 201) {
+                table.destroy();
+                loadTable();
+                Swal.fire({
+
+                    title: "İşlem Başarılı",
+                    text: response.message,
+                    icon: "success"
+                });
+            } else {
+                Swal.fire({
+                    title: "İşlem Başarısız",
+                    text: response.message,
+                    icon: "error"
+                });
+            }
+        });
+    }
+
+    function remove(sicilNo) {
+        $.ajax({
+            url: 'https://localhost:44323/api/Kullanici/AktiflikDegistir?sicilNo=' + sicilNo,
+            crossDomain: true,
+            method: 'put',
+            headers: {
+                'accept': 'text/plain'
+            }
+        }).done(function (response) {
+
+            if (response.statusCode == 200) {
+                table.destroy();
+                loadTable();
+                Swal.fire({
+                    title: "İşlem Başarılı",
+                    text: response.message,
+                    icon: "success"
+                });
+            } else {
+                Swal.fire({
+                    title: "İşlem Başarısız",
+                    text: response.message,
+                    icon: "error"
+                });
+            }
+        });
+    }
+
+    function getById(id) {
+        $.ajax({
+            url: 'https://localhost:44323/api/Kullanici/GetById',
+            crossDomain: true,
+            headers: {
+                'accept': 'text/plain'
+            },
+            data: {
+                'id': id
+            }
+        }).done(function (response) {
+            //debugger;
+            if (response.statusCode == 200) {
+
+                $("#kullaniciAdiUpdate").val(response.data.kullaniciAdi);
+                $("#kullaniciSoyadiUpdate").val(response.data.kullaniciSoyadi);
+                $("#sicilNoUpdate").val(response.data.kullaniciSicilNo);
+                $("#epostaUpdate").val(response.data.kullaniciPosta);
+                $("#adresUpdate").val(response.data.kullaniciAdres);
+                // var a = document.getElementById('personelMi').checked ? "true" : "false";
+                // var b = document.getElementById('kullaniciMi').checked ? "true" : "false";
+                document.getElementById("personelMi").checked = response.data.personelMi;
+                document.getElementById("kullaniciMi").checked = response.data.kullaniciMi;
+                debugger;
+            }
+            console.log(response);
+        });
+    }
+
+    function update() {
+        $.ajax({
+            url: 'https://localhost:44323/api/Kullanici',
+            crossDomain: true,
+            method: 'put',
+            headers: {
+                'accept': 'text/plain'
+            },
+            contentType: 'application/json',
+            // data: '{\n  "kullaniciAdi": "string",\n  "kullaniciSoyadi": "string",\n  "kullaniciSicilNo": "string",\n  "kullaniciPosta": "string",\n  "kullaniciAdres": "string",\n  "personelMi": true,\n  "kullaniciMi": true\n}',
+            data: JSON.stringify({
+                'kullaniciAdi': $("#kullaniciAdiUpdate").val(),
+                'kullaniciSoyadi': $("#kullaniciSoyadiUpdate").val(),
+                'kullaniciSicilNo': $("#sicilNoUpdate").val(),
+                'kullaniciPosta': $("#epostaUpdate").val(),
+                'kullaniciAdres': $("#adresUpdate").val(),
+                'personelMi': document.getElementById('personelMi').checked ? true : false,
+                'kullaniciMi': document.getElementById('kullaniciMi').checked ? true : false
+            })
+        }).done(function (response) {
+            if (response.statusCode == 200) {
+                table.destroy();
+                loadTable();
+                Swal.fire({
+
+                    title: "İşlem Başarılı",
+                    text: response.message,
+                    icon: "success"
+                });
+            } else {
+                Swal.fire({
+                    title: "İşlem Başarısız",
+                    text: response.message,
+                    icon: "error"
+                });
+            }
+        });
+    }
+</script>

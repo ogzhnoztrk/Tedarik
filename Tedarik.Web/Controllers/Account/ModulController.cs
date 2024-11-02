@@ -7,7 +7,7 @@ namespace Tedarik.Web.Controllers.Account
 {
     public class ModulController : BaseController
     {
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var list = new List<Modul>();
 
