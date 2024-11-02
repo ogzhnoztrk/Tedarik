@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Tedarik.Entities.Concrete;
 using Tedarik.Entities.Concrete.Auth;
 
 namespace Tedarik.DataAccess.Context
@@ -19,6 +20,7 @@ namespace Tedarik.DataAccess.Context
         public DbSet<Kullanici> Kullanicilar { get; set; }
         public DbSet<Modul> Moduller{ get; set; }
         public DbSet<Yetki> Yetkiler{ get; set; }
+        public DbSet<TedarikClass> Tedarikler{ get; set; }
 
 
 

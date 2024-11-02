@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tedarik.DataAccess.Repositories.Abstracts;
+using Tedarik.DataAccess.Repositories.Abstracts.Auth;
 
 namespace Tedarik.DataAccess.Repositories.Persistence
 {
@@ -12,5 +13,6 @@ namespace Tedarik.DataAccess.Repositories.Persistence
         public IKullaniciRepository Kullanici{ get; }
         public IModulRepository Modul{ get; }
         public IYetkiRepository Yetki{ get; }
+        public ITedarikClassRepository TedarikClass { get; }
     }
 }

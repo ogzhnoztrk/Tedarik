@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Tedarik.Core.DataAccess.Repository;
 using Tedarik.Entities.Concrete.Auth;
 
-namespace Tedarik.DataAccess.Repositories.Abstracts
+namespace Tedarik.DataAccess.Repositories.Abstracts.Auth
 {
     public interface IYetkiRepository : IRepository<Yetki>
     {
