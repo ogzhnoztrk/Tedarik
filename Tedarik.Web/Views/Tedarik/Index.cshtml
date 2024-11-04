@@ -7,8 +7,37 @@
 
 
 <div class="row">
-	<a class="btn btn-outline-secondary" asp-action="UpsertTedarik">Tedarik Ekle</a>
-	<div class="col-lg-12">
+
+
+	<div class="col-lg-2">
+		<div class="accordion" id="accordionPanelsStayOpenExample">
+
+
+			<!--İlişkili İşlemler-->
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+						İlişkili İşlemler
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
+					<div class="accordion-body">
+						<ul class="list-group">
+							 <li class="list-group-item">
+								 @if ((ViewBag.Roles as string).Contains("301"))
+								{
+									<a class="btn btn-secondary" asp-action="UpsertTedarik">Tedarik Ekle</a>
+								}
+								
+							</li> 
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="col-lg-10">
 		<table id="myTable" class="display">
 			<thead>
 				<tr>
@@ -24,11 +53,18 @@
 					<th>Kısım Nu.</th>
 					<th>Taksit Sayisi</th>
 					<th>Sozlesme Num</th>
-					<th>Sil</th>
+					 @if ((ViewBag.Roles as string).Contains("302"))
+					{<th>Sil</th> }
+
+					
+					
 					<th>Güncelle</th>
 					<th>Taksitler</th>
 					<th>Detay</th>
-					<th>Plan</th>
+					@if ((ViewBag.Roles as string).Contains("307"))
+					{<th>Plan</th> }
+
+					
 
 
 				</tr>
@@ -44,8 +80,9 @@
 
 
 <script type="text/javascript">
-
+	var roles = "@ViewBag.Roles"
 	let table;
+	debugger;
 	$(document).ready(function () {
 		loadTable();
 	});
@@ -79,11 +116,16 @@
 				{
 					"data": "id",
 					"render": function (data) {
-
-						return `
-								 <div class="w-75 btn-group" role="group">
-											 <a onClick=getById("${data}") class="btn btn-danger mx-2" type="button">Sil</a>
-								 </div>`;
+						if(roles.includes("302")){
+							return `
+									 <div class="w-75 btn-group" role="group">
+												 <a onClick=getById("${data}") class="btn btn-danger mx-2" type="button">Sil</a>
+									 </div>`;
+						}else{
+							return ``;
+						}
+		
+						
 					},
 					"width": "20%"
 				},
@@ -93,7 +135,7 @@
 
 						return `
 								 <div class="w-75 btn-group" role="group">
-											 <a onClick=getById("${data}") class="btn btn-warning mx-2" type="button">Güncelle</a>
+											 <a href="/Tedarik/UpsertTedarik?id=${data}" class="btn btn-warning mx-2" type="button">Güncelle</a>
 								 </div>`;
 					},
 					"width": "20%"
@@ -123,11 +165,15 @@
 				{
 					"data": "id",
 					"render": function (data) {
-
-						return `
-								 <div class="w-75 btn-group" role="group">
-											 <a onClick=getById("${data}") class="btn btn-success mx-2" type="button">Plan</a>
-								 </div>`;
+						if (roles.includes("307")) {
+							return `
+									 <div class="w-75 btn-group" role="group">
+												 <a onClick=getById("${data}") class="btn btn-success mx-2" type="button">Plan</a>
+									 </div>`;
+						} else {
+							return ``;
+						}
+						
 					},
 					"width": "20%"
 				},

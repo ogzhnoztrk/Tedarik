@@ -22,7 +22,7 @@ namespace Tedarik.Web.Core.Controllers
                 {
                     claimsJson.Add(claim.Type, claim.Value);
                 }
-                ViewBag.Roles = claimsJson["role"];
+                ViewBag.Roles = claimsJson["role"].ToString();
                 ViewBag.KullaniciAdiSoyadi = claimsJson["kullanici_adi"] + " " + claimsJson["kullanici_soyadi"];
 
 

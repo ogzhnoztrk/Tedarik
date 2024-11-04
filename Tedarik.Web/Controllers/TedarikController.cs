@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tedarik.Entities.Concrete;
 using Tedarik.Models.VMs.Tedarik;
+using Tedarik.Web.Core.Controllers;
 using Tedarik.Web.Helpers;
 
 namespace Tedarik.Web.Controllers
 {
-    public class TedarikController : Controller
+    public class TedarikController : BaseController
     {
         public IActionResult Index()
         {
@@ -37,7 +38,7 @@ namespace Tedarik.Web.Controllers
 
 				if (!(tedarikResponse.Data is null))
 				{
-					return View(tedarikResponse);
+					return View(tedarikResponse.Data);
 				}
 			}
 

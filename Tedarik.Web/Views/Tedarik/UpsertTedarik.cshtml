@@ -415,8 +415,14 @@
 
 <body>
 	<form method="post" asp-action="UpsertTedarik">
+		<input asp-for="Id" hidden />
+
+		@if ((ViewBag.Roles as string).Contains("303"))
+		{
+
 		<div class="container container-1">
-		<input asp-for="Id" hidden/>
+		
+			
 			<h2> Tedarik Kısmı</h2>
 
 			<div class="form-row">
@@ -465,8 +471,8 @@
 					<input required type="number" id="ksmnmr"  asp-for="KisimNumarasi">
 				</div>
 				<div class="form-input">
-					<label for="tkstsys" asp-for="TaksitMiktari">Taksit Sayısı:</label>
-					<input required type="number" id="tkstsys"   asp-for="TaksitMiktari">
+					<label for="tkstsys" asp-for="TaksitSayisi">Taksit Sayısı:</label>
+					<input required type="number" id="tkstsys"   asp-for="TaksitSayisi">
 				</div>
 				<div class="form-input">
 					<label for="tkstno" asp-for="TaksitNumarasi">Taksit Numarası:</label>
@@ -553,134 +559,146 @@
 					<input required type="text" asp-for="ProjeSorumlusu" id="prjsrmlsu" >
 				</div>
 			</div>
-		</div>
+			</div>
 
-		<div class="container container-2">
-			<h2>Plan Kısmı</h2>
-			<div class="form-row">
-				<div class="form-input">
-					<label for="onckialmtrh" asp-for="OncekiAlimTarihi">Önceki Alım Tarihi:</label>
-					<input  type="date" asp-for="OncekiAlimTarihi" id="onckialmtrh" name="onckialmtrh">
-				</div>
-				<div class="form-input">
-					<label for="onkcialmypnblge" asp-for="OncekiAlimBolge">Önceki Alım Yapan Bölge:</label>
-					<input  type="text" asp-for="OncekiAlimBolge" id="onkcialmypnblge" name="onkcialmypnblge">
-				</div>
+		}
+		@if ((ViewBag.Roles as string).Contains("304"))
+		{
+			<div class="container container-2">
+				<h2>Plan Kısmı</h2>
+				<div class="form-row">
+					<div class="form-input">
+						<label for="onckialmtrh" asp-for="OncekiAlimTarihi">Önceki Alım Tarihi:</label>
+						<input type="date" asp-for="OncekiAlimTarihi" id="onckialmtrh" name="onckialmtrh">
+					</div>
+					<div class="form-input">
+						<label for="onkcialmypnblge" asp-for="OncekiAlimBolge">Önceki Alım Yapan Bölge:</label>
+						<input type="text" asp-for="OncekiAlimBolge" id="onkcialmypnblge" name="onkcialmypnblge">
+					</div>
 
-				<div class="form-input">
-					<label for="oncalmmktr" asp-for="OncekiAlimMiktar">Önceki Alım Miktarı:</label>
-					<input  type="number" asp-for="OncekiAlimMiktar" id="oncalmmktr" name="oncalmmktr">
-				</div>
-				<div class="form-input">
-					<label for="oncalmfyt" asp-for="OncekiAlimFiyat">Önceki Alım Fiyatı:</label>
-					<input  type="number" asp-for="OncekiAlimFiyat" id="oncalmfyt" name="oncalmfyt">
-				</div>
-				<div class="form-input">
-					<label for="ufe" asp-for="Ufe">ÜFE:</label>
-					<input  type="number" asp-for="Ufe" id="ufe" name="ufe">
-				</div>
+					<div class="form-input">
+						<label for="oncalmmktr" asp-for="OncekiAlimMiktar">Önceki Alım Miktarı:</label>
+						<input type="number" asp-for="OncekiAlimMiktar" id="oncalmmktr" name="oncalmmktr">
+					</div>
+					<div class="form-input">
+						<label for="oncalmfyt" asp-for="OncekiAlimFiyat">Önceki Alım Fiyatı:</label>
+						<input type="number" asp-for="OncekiAlimFiyat" id="oncalmfyt" name="oncalmfyt">
+					</div>
+					<div class="form-input">
+						<label for="ufe" asp-for="Ufe">ÜFE:</label>
+						<input type="number" asp-for="Ufe" id="ufe" name="ufe">
+					</div>
 
-				<div class="form-input">
-					<label for="gnclbrmfyt" asp-for="GuncelBirimFiyat">Güncel Birim Fiyatı:</label>
-					<input  type="number" asp-for="GuncelBirimFiyat" id="gnclbrmfyt" name="gnclbrmfyt">
-				</div>
-				<div class="form-input">
-					<label for="gncltutr" asp-for="GuncelTutar">Güncel Tutar:</label>
-					<input  type="number" asp-for="GuncelTutar" id="gncltutr" name="gncltutr">
+					<div class="form-input">
+						<label for="gnclbrmfyt" asp-for="GuncelBirimFiyat">Güncel Birim Fiyatı:</label>
+						<input type="number" asp-for="GuncelBirimFiyat" id="gnclbrmfyt" name="gnclbrmfyt">
+					</div>
+					<div class="form-input">
+						<label for="gncltutr" asp-for="GuncelTutar">Güncel Tutar:</label>
+						<input type="number" asp-for="GuncelTutar" id="gncltutr" name="gncltutr">
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="container container-3">
-			<h2>Lojistik Kısmı</h2>
-			<div class="form-row">
+		}
+		@if ((ViewBag.Roles as string).Contains("305"))
+		{
+			<div class="container container-3">
+				<h2>Lojistik Kısmı</h2>
+				<div class="form-row">
 
-				<div class="form-input">
-					<label for="mltslmtrh" asp-for="MalTeslimTarihi">Mal Teslim Tarihi:</label>
-					<input  type="date" asp-for="MalTeslimTarihi" id="mltslmtrh" name="mltslmtrh">
-				</div>
-				<div class="form-input">
-					<label for="mhtrtrh" asp-for="MuhtiraTarih">Muhtıra Tarihi:</label>
-					<input  type="date" asp-for="MuhtiraTarih" id="mhtrtrh" name="mhtrtrh">
-				</div>
-				<div class="form-input">
-					<label for="tsnrmlislmblgtrh" asp-for="TasinirkesilmeTarihi">Taşınır Mal İşlem Belgesi Tarihi:</label>
-					<input  type="date" asp-for="TasinirkesilmeTarihi" id="tsnrmlislmblgtrh" name="tsnrmlislmblgtrh">
-				</div>
-				<div class="form-input">
-					<label for="ikmmkzsvktrh" asp-for="IkmalSevkTarih">İkmal Merkezine Sevk Tarihi:</label>
-					<input  type="date" id="ikmmkzsvktrh" asp-for="IkmalSevkTarih" name="ikmmkzsvktrh">
+					<div class="form-input">
+						<label for="mltslmtrh" asp-for="MalTeslimTarihi">Mal Teslim Tarihi:</label>
+						<input type="date" asp-for="MalTeslimTarihi" id="mltslmtrh" name="mltslmtrh">
+					</div>
+					<div class="form-input">
+						<label for="mhtrtrh" asp-for="MuhtiraTarih">Muhtıra Tarihi:</label>
+						<input type="date" asp-for="MuhtiraTarih" id="mhtrtrh" name="mhtrtrh">
+					</div>
+					<div class="form-input">
+						<label for="tsnrmlislmblgtrh" asp-for="TasinirkesilmeTarihi">Taşınır Mal İşlem Belgesi Tarihi:</label>
+						<input type="date" asp-for="TasinirkesilmeTarihi" id="tsnrmlislmblgtrh" name="tsnrmlislmblgtrh">
+					</div>
+					<div class="form-input">
+						<label for="ikmmkzsvktrh" asp-for="IkmalSevkTarih">İkmal Merkezine Sevk Tarihi:</label>
+						<input type="date" id="ikmmkzsvktrh" asp-for="IkmalSevkTarih" name="ikmmkzsvktrh">
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="container container-4">
-			<h2>Muayene Kısmı</h2>
-			<div class="form-row">
-				<div class="form-input">
-					<label for="mhtralmtrh" asp-for="MuhtiraAlimTarihi">Muhtıra Alım Tarihi:</label>
-					<input  type="date" asp-for="MuhtiraAlimTarihi" id="mhtralmtrh" name="mhtralmtrh">
-				</div>
-				<div class="form-input">
-					<label for="myntblgtrh" asp-for="MuaTebligTarihi">Muayene Tebliğ Tarihi:</label>
-					<input  type="date" asp-for="MuaTebligTarihi" id="myntblgtrh" name="myntblgtrh">
-				</div>
-				<div class="form-input">
-					<label for="mynbskn" asp-for="MuaKomisyonBaskani">Muayene Komisyonu Başkanı:</label>
-					<input  type="text" asp-for="MuaKomisyonBaskani" id="mynbskn" name="mynbskn">
-				</div>
-				<div class="form-input">
-					<label for="mynuye1" asp-for="MuaUye1">Muayene Üye 1:</label>
-					<input  type="text" asp-for="MuaUye1" id="mynuye1" name="mynuye1">
-				</div>
-				<div class="form-input">
-					<label for="mynuye2" asp-for="MuaUye2">Muayene Üye 2:</label>
-					<input  type="text" id="mynuye2" asp-for="MuaUye2" name="mynuye2">
-				</div>
-				<div class="form-input">
-					<label for="mynuye3" asp-for="MuaUye3">Muayene Üye 3:</label>
-					<input  type="text" id="mynuye3" asp-for="MuaUye3" name="mynuye3">
-				</div>
-				<div class="form-input">
-					<label for="mlsrmlsu" asp-for="MalSorumlusu">Mal Sorumlusu:</label>
-					<input  type="text" asp-for="MalSorumlusu" id="mlsrmlsu" name="mlsrmlsu">
-				</div>
-				<div class="form-input">
-					<label for="gckmesbebi" asp-for="GecikmeSebebi">Varsa Gecikme Sebebi:</label>
-					<input  type="text" asp-for="GecikmeSebebi" id="gckmesbebi" name="gckmesbebi">
-				</div>
-				<div class="form-input">
-					<label for="fzkmyntrh" asp-for="FizikselMuaTarih">Fiziksel Muayene Tarihi:</label>
-					<input  type="date" asp-for="FizikselMuaTarih" id="fzkmyntrh" name="fzkmyntrh">
-				</div>
-				<div class="form-input">
-					<label for="fzkmynsnc" asp-for="FizikselMuaSonuc">Fiziksel Muayene Sonucu:</label>
-					<input  type="text" asp-for="FizikselMuaSonuc" id="fzkmynsnc" name="fzkmynsnc">
-				</div>
-				<div class="form-input">
-					<label for="labgdstrh" asp-for="LabGidisTarihi">Labaratuvara Gidiş Tarihi:</label>
-					<input  type="date" asp-for="LabGidisTarihi" id="labgdstrh" name="labgdstrh">
-				</div>
-				<div class="form-input">
-					<label for="labdnstrh" asp-for="LabDonusTarihi">Labaratuvardan Dönüş Tarihi:</label>
-					<input  type="date" asp-for="LabDonusTarihi" id="labdnstrh" name="labdnstrh">
-				</div>
+		}
+		@if ((ViewBag.Roles as string).Contains("306"))
+		{
+			<div class="container container-4">
+				<h2>Muayene Kısmı</h2>
+				<div class="form-row">
+					<div class="form-input">
+						<label for="mhtralmtrh" asp-for="MuhtiraAlimTarihi">Muhtıra Alım Tarihi:</label>
+						<input type="date" asp-for="MuhtiraAlimTarihi" id="mhtralmtrh" name="mhtralmtrh">
+					</div>
+					<div class="form-input">
+						<label for="myntblgtrh" asp-for="MuaTebligTarihi">Muayene Tebliğ Tarihi:</label>
+						<input type="date" asp-for="MuaTebligTarihi" id="myntblgtrh" name="myntblgtrh">
+					</div>
+					<div class="form-input">
+						<label for="mynbskn" asp-for="MuaKomisyonBaskani">Muayene Komisyonu Başkanı:</label>
+						<input type="text" asp-for="MuaKomisyonBaskani" id="mynbskn" name="mynbskn">
+					</div>
+					<div class="form-input">
+						<label for="mynuye1" asp-for="MuaUye1">Muayene Üye 1:</label>
+						<input type="text" asp-for="MuaUye1" id="mynuye1" name="mynuye1">
+					</div>
+					<div class="form-input">
+						<label for="mynuye2" asp-for="MuaUye2">Muayene Üye 2:</label>
+						<input type="text" id="mynuye2" asp-for="MuaUye2" name="mynuye2">
+					</div>
+					<div class="form-input">
+						<label for="mynuye3" asp-for="MuaUye3">Muayene Üye 3:</label>
+						<input type="text" id="mynuye3" asp-for="MuaUye3" name="mynuye3">
+					</div>
+					<div class="form-input">
+						<label for="mlsrmlsu" asp-for="MalSorumlusu">Mal Sorumlusu:</label>
+						<input type="text" asp-for="MalSorumlusu" id="mlsrmlsu" name="mlsrmlsu">
+					</div>
+					<div class="form-input">
+						<label for="gckmesbebi" asp-for="GecikmeSebebi">Varsa Gecikme Sebebi:</label>
+						<input type="text" asp-for="GecikmeSebebi" id="gckmesbebi" name="gckmesbebi">
+					</div>
+					<div class="form-input">
+						<label for="fzkmyntrh" asp-for="FizikselMuaTarih">Fiziksel Muayene Tarihi:</label>
+						<input type="date" asp-for="FizikselMuaTarih" id="fzkmyntrh" name="fzkmyntrh">
+					</div>
+					<div class="form-input">
+						<label for="fzkmynsnc" asp-for="FizikselMuaSonuc">Fiziksel Muayene Sonucu:</label>
+						<input type="text" asp-for="FizikselMuaSonuc" id="fzkmynsnc" name="fzkmynsnc">
+					</div>
+					<div class="form-input">
+						<label for="labgdstrh" asp-for="LabGidisTarihi">Labaratuvara Gidiş Tarihi:</label>
+						<input type="date" asp-for="LabGidisTarihi" id="labgdstrh" name="labgdstrh">
+					</div>
+					<div class="form-input">
+						<label for="labdnstrh" asp-for="LabDonusTarihi">Labaratuvardan Dönüş Tarihi:</label>
+						<input type="date" asp-for="LabDonusTarihi" id="labdnstrh" name="labdnstrh">
+					</div>
 
-				<div class="form-input">
-					<label for="mynkrrtrh" asp-for="MuakararTarihi">Muayene Karar Tarihi:</label>
-					<input  type="date" asp-for="MuakararTarihi" id="mynkrrtrh" name="mynkrrtrh">
+					<div class="form-input">
+						<label for="mynkrrtrh" asp-for="MuakararTarihi">Muayene Karar Tarihi:</label>
+						<input type="date" asp-for="MuakararTarihi" id="mynkrrtrh" name="mynkrrtrh">
+					</div>
+					<div class="form-input">
+						<label for="mynsnc" asp-for="MuaSonuc">Muayene Sonucu:</label>
+						<input type="text" asp-for="MuaSonuc" id="mynsnc" name="mynsnc">
+					</div>
+					<div class="form-input">
+						<label for="mynaciklama" asp-for="MuaAciklamasi">Muayene Açıklaması:</label>
+						<input type="text" asp-for="MuaAciklamasi" id="mynaciklama" name="mynaciklama">
+					</div>
+					<!-- Diğer 53 alan buraya eklenebilir -->
 				</div>
-				<div class="form-input">
-					<label for="mynsnc" asp-for="MuaSonuc">Muayene Sonucu:</label>
-					<input  type="text" asp-for="MuaSonuc" id="mynsnc" name="mynsnc">
-				</div>
-				<div class="form-input">
-					<label for="mynaciklama" asp-for="MuaAciklamasi">Muayene Açıklaması:</label>
-					<input  type="text" asp-for="MuaAciklamasi" id="mynaciklama" name="mynaciklama">
-				</div>
-				<!-- Diğer 53 alan buraya eklenebilir -->
 			</div>
-		</div>
+
+		}
+		
 		<button class="button" type="submit">
 			<div class="trash">
 				<div class="top">
