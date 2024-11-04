@@ -12,8 +12,8 @@ using Tedarik.DataAccess.Context;
 namespace Tedarik.DataAccess.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    [Migration("20241104071238_tedarik_mig_added")]
-    partial class tedarik_mig_added
+    [Migration("20241104151236_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,7 +62,7 @@ namespace Tedarik.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Kullanicilar");
+                    b.ToTable("TBL_KULLANICILAR");
                 });
 
             modelBuilder.Entity("Tedarik.Entities.Concrete.Auth.Modul", b =>
@@ -126,63 +126,65 @@ namespace Tedarik.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("tdrk_AlimEmriProNo");
 
-                    b.Property<decimal?>("AlimFiyati")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("tdrk_AlimFiyati");
-
                     b.Property<string>("AlimMuhNo")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("tdrk_AlimMuhNo");
 
-                    b.Property<DateTime?>("AlimMuhTarihNo")
+                    b.Property<DateTime?>("AlimMuhTarih")
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_AlimMuhTarihNo");
 
-                    b.Property<string>("Cins")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("tdrk_Cins");
-
-                    b.Property<DateTime?>("Davet")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_Davet");
-
-                    b.Property<short?>("Donem")
-                        .HasColumnType("smallint")
-                        .HasColumnName("tdrk_Donem");
-
-                    b.Property<string>("Eniyifirma")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("tdrk_Eniyifirma");
-
-                    b.Property<decimal?>("GuncelFiyat")
+                    b.Property<decimal?>("BirimFiyati")
                         .HasColumnType("decimal(18,2)")
-                        .HasColumnName("tdrk_GuncelFiyat");
+                        .HasColumnName("tdrk_BirimFiyati");
+
+                    b.Property<DateTime?>("FizikselMuaSonuc")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("tdrk_FizikselMuaSonuc");
+
+                    b.Property<DateTime?>("FizikselMuaTarih")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("tdrk_FizikselMuaTarih");
+
+                    b.Property<string>("GecikmeSebebi")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tdrk_GecikmeSebebi");
+
+                    b.Property<decimal?>("GuncelBirimFiyat")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("tdrk_GuncelBirimFiyat");
 
                     b.Property<decimal?>("GuncelTutar")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("tdrk_GuncelTutar");
 
+                    b.Property<string>("IhAlimUsul")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("tdrk_IhAlimUsul");
+
                     b.Property<DateTime?>("IhaleTarihi")
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_IhaleTarihi");
 
-                    b.Property<decimal?>("IhaleTutari")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("tdrk_IhaleTutari");
+                    b.Property<DateTime?>("IkmalSevkTarih")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("tdrk_IkmalSevkTarihi");
 
                     b.Property<DateTime?>("KararTarihi")
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_KararTarihi");
 
-                    b.Property<DateTime?>("KararTeblig")
+                    b.Property<DateTime?>("KararTebligTarih")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_KararTeblig");
+                        .HasColumnName("tdrk_KararTebligTarih");
+
+                    b.Property<decimal?>("KararTutari")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("tdrk_KararTutari");
 
                     b.Property<string>("Kategori")
                         .IsRequired()
@@ -190,81 +192,117 @@ namespace Tedarik.DataAccess.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("tdrk_Kategori");
 
-                    b.Property<DateTime?>("KatiKabul")
+                    b.Property<DateTime?>("KatiKabulTarihi")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_KatiKabul");
+                        .HasColumnName("tdrk_KatiKabulTarihi");
 
-                    b.Property<short?>("Kisim")
+                    b.Property<int?>("KisimMiktari")
+                        .HasColumnType("int")
+                        .HasColumnName("tdrk_KisimMiktari");
+
+                    b.Property<short?>("KisimNumarasi")
                         .HasColumnType("smallint")
-                        .HasColumnName("tdrk_Kisim");
+                        .HasColumnName("tdrk_KisimNo");
 
                     b.Property<string>("Kuvvet")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("tdrk_Kuvvet");
 
-                    b.Property<DateTime?>("LabdonusTarihi")
+                    b.Property<DateTime?>("LabDonusTarihi")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_LabdonusTarihi");
+                        .HasColumnName("tdrk_LabDonusTarihi");
 
-                    b.Property<DateTime?>("LabgidisTarihi")
+                    b.Property<DateTime?>("LabGidisTarihi")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_LabgidisTarihi");
+                        .HasColumnName("tdrk_LabGidisTarihi");
 
-                    b.Property<DateTime?>("MalteslimTarihi")
+                    b.Property<string>("MalSorumlusu")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tdrk_MalSorumlusu");
+
+                    b.Property<DateTime?>("MalTeslimTarihi")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_MalteslimTarihi");
+                        .HasColumnName("tdrk_MalTeslimTarihi");
 
-                    b.Property<int?>("Miktar")
-                        .HasColumnType("int")
-                        .HasColumnName("tdrk_Miktar");
+                    b.Property<string>("MalzemeAdi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tdrk_MalzemeAdi");
 
-                    b.Property<DateTime?>("MuaTarihi")
+                    b.Property<DateTime?>("MuaAciklamasi")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_MuaTarihi");
+                        .HasColumnName("tdrk_MuaAciklamasi");
+
+                    b.Property<string>("MuaKomisyonBaskani")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tdrk_MuaKomisyonBaskani");
+
+                    b.Property<DateTime?>("MuaSonuc")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("tdrk_MuaSonuc");
+
+                    b.Property<DateTime?>("MuaTebligTarihi")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("tdrk_MuaTebligTarihi");
+
+                    b.Property<string>("MuaUye1")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tdrk_MuaUye1");
+
+                    b.Property<string>("MuaUye2")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tdrk_MuaUye2");
+
+                    b.Property<string>("MuaUye3")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tdrk_MuaUye3");
 
                     b.Property<DateTime?>("MuakararTarihi")
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_MuakararTarihi");
 
-                    b.Property<DateTime?>("MuhtiraAlim")
+                    b.Property<DateTime?>("MuhtiraAlimTarihi")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_MuhtiraAlim");
+                        .HasColumnName("tdrk_MuhtiraAlimTarihi");
 
                     b.Property<DateTime?>("MuhtiraTarih")
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_MuhtiraTarih");
 
-                    b.Property<string>("Olcu")
+                    b.Property<string>("OlcuBirimi")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)")
-                        .HasColumnName("tdrk_Olcu");
+                        .HasColumnName("tdrk_OlcuBirimi");
 
-                    b.Property<string>("OncekiBolge")
+                    b.Property<string>("OncekiAlimBolge")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("tdrk_OncekiBolge");
+                        .HasColumnName("tdrk_OncekiAlimBolge");
 
-                    b.Property<decimal?>("OncekiMiktar")
+                    b.Property<decimal?>("OncekiAlimFiyat")
                         .HasColumnType("decimal(18,2)")
-                        .HasColumnName("tdrk_OncekiMiktar");
+                        .HasColumnName("tdrk_OncekiAlimFiyat");
 
-                    b.Property<DateTime?>("OncekiTarih")
+                    b.Property<decimal?>("OncekiAlimMiktar")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("tdrk_OncekiAlimMiktar");
+
+                    b.Property<DateTime?>("OncekiAlimTarihi")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_OncekiTarih");
+                        .HasColumnName("tdrk_OncekiAlimTarihi");
 
-                    b.Property<decimal?>("OncekiTutar")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("tdrk_OncekiTutar");
-
-                    b.Property<string>("Proje")
+                    b.Property<string>("ProjeSorumlusu")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("tdrk_Proje");
+                        .HasColumnName("tdrk_ProjeSorumlusu");
+
+                    b.Property<DateTime?>("ProjeYili")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("tdrk_ProjeYili");
 
                     b.Property<short?>("SNo")
                         .HasColumnType("smallint")
@@ -273,6 +311,10 @@ namespace Tedarik.DataAccess.Migrations
                     b.Property<DateTime?>("Sevk")
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_Sevk");
+
+                    b.Property<DateTime?>("SozlesmeDavetTarihi")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("tdrk_SozlesmeDavetTarihi");
 
                     b.Property<string>("SozlesmeNo")
                         .IsRequired()
@@ -283,47 +325,37 @@ namespace Tedarik.DataAccess.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_SozlesmeTarihi");
 
-                    b.Property<short?>("Taksit")
-                        .HasColumnType("smallint")
-                        .HasColumnName("tdrk_Taksit");
-
                     b.Property<int?>("TaksitMiktari")
                         .HasColumnType("int")
                         .HasColumnName("tdrk_TaksitMiktari");
 
-                    b.Property<short?>("TaksitNu")
+                    b.Property<short?>("TaksitNumarasi")
                         .HasColumnType("smallint")
-                        .HasColumnName("tdrk_TaksitNu");
+                        .HasColumnName("tdrk_TaksitNumarasi");
+
+                    b.Property<short?>("TaksitSayisi")
+                        .HasColumnType("smallint")
+                        .HasColumnName("tdrk_TaksitSayisi");
 
                     b.Property<DateTime?>("TasinirkesilmeTarihi")
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_TasinirkesilmeTarihi");
 
-                    b.Property<DateTime?>("TeslimBaslangic")
+                    b.Property<DateTime?>("TeslimBaslangicTarih")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_TeslimBaslangic");
+                        .HasColumnName("tdrk_TeslimBaslangicTarih");
 
-                    b.Property<DateTime?>("TeslimBitis")
+                    b.Property<DateTime?>("TeslimBitisTarih")
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_TeslimBitis");
+                        .HasColumnName("tdrk_TeslimBitisTarih");
 
-                    b.Property<int?>("ToplamMiktar")
+                    b.Property<int?>("ToplamAlimMiktari")
                         .HasColumnType("int")
-                        .HasColumnName("tdrk_ToplamMiktar");
+                        .HasColumnName("tdrk_ToplamAlimMiktari");
 
                     b.Property<decimal?>("Ufe")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("tdrk_Ufe");
-
-                    b.Property<string>("Usul")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("tdrk_Usul");
-
-                    b.Property<decimal?>("YaklasikMaliyet")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("tdrk_YaklasikMaliyet");
 
                     b.Property<DateTime?>("YaklasikdonusTarihi")
                         .HasColumnType("datetime2")
@@ -333,9 +365,15 @@ namespace Tedarik.DataAccess.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_YaklasikgidisTarihi");
 
+                    b.Property<string>("Yukleyici")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("tdrk_Yukleyici");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TBL_TEDARIK");
+                    b.ToTable("TBL_TEDARIKLER");
                 });
 
             modelBuilder.Entity("Tedarik.Entities.Concrete.Auth.Yetki", b =>

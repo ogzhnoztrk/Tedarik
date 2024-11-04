@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tedarik.Entities.Concrete.Auth;
 
-namespace Tedarik.Models.VMs
+namespace Tedarik.Models.VMs.Kullanici
 {
     public class ModulEkleVM
     {

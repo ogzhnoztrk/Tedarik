@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tedarik.Models.VMs
+namespace Tedarik.Models.VMs.Kullanici
 {
     public class KullaniciGirisVm
     {

@@ -131,7 +131,6 @@ namespace Tedarik.DataAccess.Migrations
                         .HasColumnName("tdrk_AlimMuhNo");
 
                     b.Property<DateTime?>("AlimMuhTarih")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("datetime2")
                         .HasColumnName("tdrk_AlimMuhTarihNo");
 
@@ -205,7 +204,6 @@ namespace Tedarik.DataAccess.Migrations
 
                     b.Property<string>("Kuvvet")
                         .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("tdrk_Kuvvet");
 
@@ -227,9 +225,8 @@ namespace Tedarik.DataAccess.Migrations
 
                     b.Property<string>("MalzemeAdi")
                         .IsRequired()
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("tdrk_Kuvvet");
+                        .HasColumnName("tdrk_MalzemeAdi");
 
                     b.Property<DateTime?>("MuaAciklamasi")
                         .HasColumnType("datetime2")
@@ -278,7 +275,6 @@ namespace Tedarik.DataAccess.Migrations
                         .HasColumnName("tdrk_OlcuBirimi");
 
                     b.Property<string>("OncekiAlimBolge")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("tdrk_OncekiAlimBolge");
@@ -302,9 +298,8 @@ namespace Tedarik.DataAccess.Migrations
                         .HasColumnName("tdrk_ProjeSorumlusu");
 
                     b.Property<DateTime?>("ProjeYili")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("datetime2")
-                        .HasColumnName("tdrk_AlimMuhTarihNo");
+                        .HasColumnName("tdrk_ProjeYili");
 
                     b.Property<short?>("SNo")
                         .HasColumnType("smallint")

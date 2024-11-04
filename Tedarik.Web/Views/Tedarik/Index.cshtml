@@ -1,0 +1,145 @@
+﻿@using Tedarik.Models.VMs.Tedarik
+@model List<TedarikTableVm>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_TedarikLayout.cshtml";
+}
+
+
+<div class="row">
+	<a class="btn btn-outline-secondary" asp-action="UpsertTedarik">Tedarik Ekle</a>
+	<div class="col-lg-12">
+		<table id="myTable" class="display">
+			<thead>
+				<tr>
+					<th>SNu</th>
+					<th>Alım Muh Nu.</th>
+					<th>Alım Emri/Proje Nu</th>
+					<th>Proje Yılı</th>
+					<th>Kategori</th>
+					<th>Kuvvet</th>
+					<th>Malzeme Adı</th>
+					<th>Ölçü Birimi</th>
+					<th>Top Kısım Mik</th>
+					<th>Kısım Nu.</th>
+					<th>Taksit Sayisi</th>
+					<th>Sozlesme Num</th>
+					<th>Sil</th>
+					<th>Güncelle</th>
+					<th>Taksitler</th>
+					<th>Detay</th>
+					<th>Plan</th>
+
+
+				</tr>
+			</thead>
+
+		</table>
+	</div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+	let table;
+	$(document).ready(function () {
+		loadTable();
+	});
+
+	function loadTable() {
+		var veri = @Html.Raw(Json.Serialize(Model));
+		debugger;
+		table = $('#myTable').DataTable({
+			scrollY: '300px',
+			scrollCollapse: true,
+			paging: false,
+			language: {
+				url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/tr.json'
+			},
+			data: veri,
+			responsive: true,
+			columns: [
+				{ "data": "sno", className: 'text-start' },
+				{ "data": "alimMuhtarasiNo", className: 'text-start' },
+				{ "data": "alimEmriProjeNo", className: 'text-start' },
+				{ "data": "projeYili", className: 'text-start' },
+				{ "data": "kategori", className: 'text-start' },
+				{ "data": "kuvvet", className: 'text-start' },
+				{ "data": "malzemeAdi", className: 'text-start' },
+				{ "data": "olcuBirimi", className: 'text-start' },
+				{ "data": "kisimMiktari", className: 'text-start' },
+				{ "data": "kisimNumarasi", className: 'text-start' },
+				{ "data": "taksitSayisi", className: 'text-start' },
+				{ "data": "sozlesmeNo", className: 'text-start' },
+
+				{
+					"data": "id",
+					"render": function (data) {
+
+						return `
+								 <div class="w-75 btn-group" role="group">
+											 <a onClick=getById("${data}") class="btn btn-danger mx-2" type="button">Sil</a>
+								 </div>`;
+					},
+					"width": "20%"
+				},
+				{
+					"data": "id",
+					"render": function (data) {
+
+						return `
+								 <div class="w-75 btn-group" role="group">
+											 <a onClick=getById("${data}") class="btn btn-warning mx-2" type="button">Güncelle</a>
+								 </div>`;
+					},
+					"width": "20%"
+				},
+				{
+					"data": "id",
+					"render": function (data) {
+
+						return `
+								 <div class="w-75 btn-group" role="group">
+											 <a onClick=getById("${data}") class="btn btn-primary mx-2" type="button">Taksitler</a>
+								 </div>`;
+					},
+					"width": "20%"
+				},
+				{
+					"data": "id",
+					"render": function (data) {
+
+						return `
+								 <div class="w-75 btn-group" role="group">
+											 <a onClick=getById("${data}") class="btn btn-secondary mx-2" type="button">Detay</a>
+								 </div>`;
+					},
+					"width": "20%"
+				},
+				{
+					"data": "id",
+					"render": function (data) {
+
+						return `
+								 <div class="w-75 btn-group" role="group">
+											 <a onClick=getById("${data}") class="btn btn-success mx-2" type="button">Plan</a>
+								 </div>`;
+					},
+					"width": "20%"
+				},
+
+			],
+		
+		})
+	}
+
+
+
+
+
+</script>
+

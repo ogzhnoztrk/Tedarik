@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Tedarik.Entities.Concrete
 		public Guid Id { get; set; }  // Primary Key
 
 		[Column("tdrk_SNo")]
-		public short? SNo { get; set; }
+		[AllowNull]public short? SNo { get; set; }
 
 		[Column("tdrk_AlimMuhTarihNo")]
 		public DateTime? AlimMuhTarih { get; set; }
@@ -32,8 +33,8 @@ namespace Tedarik.Entities.Concrete
 		public string AlimEmriProNo { get; set; }
 
 
-		[Column("tdrk_AlimMuhTarihNo")]
-		public DateTime? ProjeYili { get; set; }
+		[Column("tdrk_ProjeYili")]
+		[AllowNull] public DateTime? ProjeYili { get; set; }
 
 		//[Column("tdrk_Donem")]
 		//public short? Donem { get; set; }
@@ -43,10 +44,9 @@ namespace Tedarik.Entities.Concrete
 		public string Kategori { get; set; }
 
 		[Column("tdrk_Kuvvet")]
-		//[MaxLength(50)]
 		public string Kuvvet { get; set; }
 
-		[Column("tdrk_Kuvvet")]
+		[Column("tdrk_MalzemeAdi")]
 		//[MaxLength(200)]
 		public string MalzemeAdi { get; set; }
 
@@ -59,53 +59,53 @@ namespace Tedarik.Entities.Concrete
 		public string OlcuBirimi { get; set; }
 
 		[Column("tdrk_KisimMiktari")]
-		public int? KisimMiktari { get; set; }
+		[AllowNull] public int? KisimMiktari { get; set; }
 
 		[Column("tdrk_KisimNo")]
-		public short? KisimNumarasi { get; set; }
+		[AllowNull] public short? KisimNumarasi { get; set; }
 
 		[Column("tdrk_TaksitSayisi")]
-		public short? TaksitSayisi { get; set; }
+		[AllowNull] public short? TaksitSayisi { get; set; }
 
 		[Column("tdrk_TaksitNumarasi")]
-		public short? TaksitNumarasi { get; set; }
+		[AllowNull] public short? TaksitNumarasi { get; set; }
 
 		[Column("tdrk_TaksitMiktari")]
-		public int? TaksitMiktari { get; set; }
+		[AllowNull] public int? TaksitMiktari { get; set; }
 
 		[Column("tdrk_ToplamAlimMiktari")]
-		public int? ToplamAlimMiktari { get; set; }
+		[AllowNull] public int? ToplamAlimMiktari { get; set; }
 
 		[Column("tdrk_IhAlimUsul")]
 		[MaxLength(50)]
 		public string IhAlimUsul { get; set; }
 
 		[Column("tdrk_YaklasikgidisTarihi")]
-		public DateTime? YaklasikgidisTarihi { get; set; }
+		[AllowNull] public DateTime? YaklasikgidisTarihi { get; set; }
 
 		[Column("tdrk_YaklasikdonusTarihi")]
-		public DateTime? YaklasikdonusTarihi { get; set; }
+		[AllowNull] public DateTime? YaklasikdonusTarihi { get; set; }
 
 		[Column("tdrk_IhaleTarihi")]
-		public DateTime? IhaleTarihi { get; set; }
+		[AllowNull] public DateTime? IhaleTarihi { get; set; }
 
 		[Column("tdrk_KararTarihi")]
-		public DateTime? KararTarihi { get; set; }
+		[AllowNull] public DateTime? KararTarihi { get; set; }
 
 		[Column("tdrk_BirimFiyati")]
-		public decimal? BirimFiyati { get; set; }
+		[AllowNull] public decimal? BirimFiyati { get; set; }
 
 		[Column("tdrk_KararTutari")]
-		public decimal? KararTutari { get; set; }
+		[AllowNull] public decimal? KararTutari { get; set; }
 
 		[Column("tdrk_KararTebligTarih")]
-		public DateTime? KararTebligTarih { get; set; }
+		[AllowNull] public DateTime? KararTebligTarih { get; set; }
 
 		[Column("tdrk_SozlesmeDavetTarihi")]
-		public DateTime? SozlesmeDavetTarihi { get; set; }
+		[AllowNull] public DateTime? SozlesmeDavetTarihi { get; set; }
 
 		[Column("tdrk_SozlesmeTarihi")]
-		public DateTime? SozlesmeTarihi { get; set; }
+		[AllowNull] public DateTime? SozlesmeTarihi { get; set; }
 
 		[Column("tdrk_SozlesmeNo")]
 		public string SozlesmeNo { get; set; }
@@ -115,16 +115,16 @@ namespace Tedarik.Entities.Concrete
 		public string Yukleyici { get; set; }
 
 		[Column("tdrk_TeslimBaslangicTarih")]
-		public DateTime? TeslimBaslangicTarih { get; set; }
+		[AllowNull] public DateTime? TeslimBaslangicTarih { get; set; }
 
 		[Column("tdrk_TeslimBitisTarih")]
-		public DateTime? TeslimBitisTarih { get; set; }
+		[AllowNull] public DateTime? TeslimBitisTarih { get; set; }
 
 		[Column("tdrk_KatiKabulTarihi")]
-		public DateTime? KatiKabulTarihi { get; set; }
+		[AllowNull] public DateTime? KatiKabulTarihi { get; set; }
 
 		[Column("tdrk_Sevk")]
-		public DateTime? Sevk { get; set; }
+		[AllowNull] public DateTime? Sevk { get; set; }
 
 		[Column("tdrk_Aciklama")]
 		public string Aciklama { get; set; }
@@ -137,41 +137,41 @@ namespace Tedarik.Entities.Concrete
 
 		//plan
 		[Column("tdrk_OncekiAlimTarihi")]
-		public DateTime? OncekiAlimTarihi { get; set; }
+		[AllowNull] public DateTime? OncekiAlimTarihi { get; set; }
 
 		[Column("tdrk_OncekiAlimBolge")]
 		[MaxLength(50)]
-		public string OncekiAlimBolge { get; set; }
+		[AllowNull] public string? OncekiAlimBolge { get; set; }
 
 		[Column("tdrk_OncekiAlimMiktar")]
-		public decimal? OncekiAlimMiktar { get; set; }
+		[AllowNull] public decimal? OncekiAlimMiktar { get; set; }
 
 		[Column("tdrk_OncekiAlimFiyat")]
-		public decimal? OncekiAlimFiyat { get; set; }
+		[AllowNull] public decimal? OncekiAlimFiyat { get; set; }
 
 		[Column("tdrk_Ufe")]
-		public decimal? Ufe { get; set; }
+		[AllowNull]public decimal? Ufe { get; set; }
 
 		[Column("tdrk_GuncelBirimFiyat")]
-		public decimal? GuncelBirimFiyat { get; set; }
+		[AllowNull] public decimal? GuncelBirimFiyat { get; set; }
 
 		[Column("tdrk_GuncelTutar")]
-		public decimal? GuncelTutar { get; set; }
+		[AllowNull] public decimal? GuncelTutar { get; set; }
 		//planSon
 
 
 		//lojistik
 		[Column("tdrk_MalTeslimTarihi")]
-		public DateTime? MalTeslimTarihi { get; set; }
+		[AllowNull] public DateTime? MalTeslimTarihi { get; set; }
 
 		[Column("tdrk_MuhtiraTarih")]
-		public DateTime? MuhtiraTarih { get; set; }
+		[AllowNull] public DateTime? MuhtiraTarih { get; set; }
 
 		[Column("tdrk_TasinirkesilmeTarihi")]
-		public DateTime? TasinirkesilmeTarihi { get; set; }
+		[AllowNull] public DateTime? TasinirkesilmeTarihi { get; set; }
 
 		[Column("tdrk_IkmalSevkTarihi")]
-		public DateTime? IkmalSevkTarih { get; set; }
+		[AllowNull] public DateTime? IkmalSevkTarih { get; set; }
 		//lojistikson
 
 
@@ -184,42 +184,42 @@ namespace Tedarik.Entities.Concrete
 
 		//muayane
 		[Column("tdrk_MuhtiraAlimTarihi")]
-		public DateTime? MuhtiraAlimTarihi { get; set; }
+		[AllowNull] public DateTime? MuhtiraAlimTarihi { get; set; }
 
 		[Column("tdrk_MuaTebligTarihi")]
-		public DateTime? MuaTebligTarihi { get; set; }
+		[AllowNull] public DateTime? MuaTebligTarihi { get; set; }
 
 		[Column("tdrk_MuaKomisyonBaskani")]
-		public string? MuaKomisyonBaskani { get; set; }
+		[AllowNull] public string? MuaKomisyonBaskani { get; set; }
 		[Column("tdrk_MuaUye1")]
-		public string? MuaUye1 { get; set; }
+		[AllowNull] public string? MuaUye1 { get; set; }
 		[Column("tdrk_MuaUye2")]
-		public string? MuaUye2 { get; set; }
+		[AllowNull] public string? MuaUye2 { get; set; }
 		[Column("tdrk_MuaUye3")]
 		public string? MuaUye3 { get; set; }
 		[Column("tdrk_MalSorumlusu")]
-		public string? MalSorumlusu { get; set; }
+		[AllowNull] public string? MalSorumlusu { get; set; }
 		[Column("tdrk_GecikmeSebebi")]
-		public string? GecikmeSebebi { get; set; }
+		[AllowNull] public string? GecikmeSebebi { get; set; }
 
 		[Column("tdrk_FizikselMuaTarih")]
-		public DateTime? FizikselMuaTarih { get; set; }
+		[AllowNull] public DateTime? FizikselMuaTarih { get; set; }
 		[Column("tdrk_FizikselMuaSonuc")]
-		public DateTime? FizikselMuaSonuc { get; set; }
+		[AllowNull] public DateTime? FizikselMuaSonuc { get; set; }
 
 		[Column("tdrk_LabGidisTarihi")]
-		public DateTime? LabGidisTarihi { get; set; }
+		[AllowNull] public DateTime? LabGidisTarihi { get; set; }
 
 		[Column("tdrk_LabDonusTarihi")]
-		public DateTime? LabDonusTarihi { get; set; }
+		[AllowNull] public DateTime? LabDonusTarihi { get; set; }
 
 		[Column("tdrk_MuakararTarihi")]
-		public DateTime? MuakararTarihi { get; set; }
+		[AllowNull] public DateTime? MuakararTarihi { get; set; }
 
 		[Column("tdrk_MuaSonuc")]
-		public DateTime? MuaSonuc { get; set; }
+		[AllowNull] public DateTime? MuaSonuc { get; set; }
 		[Column("tdrk_MuaAciklamasi")]
-		public DateTime? MuaAciklamasi { get; set; }
+		[AllowNull] public DateTime? MuaAciklamasi { get; set; }
 
 
 		//muayaneson

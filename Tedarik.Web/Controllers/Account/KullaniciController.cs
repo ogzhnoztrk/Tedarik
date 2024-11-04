@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tedarik.Core.Models;
 using Tedarik.Entities.Concrete.Auth;
-using Tedarik.Models.VMs;
+using Tedarik.Models.VMs.Kullanici;
 using Tedarik.Web.Core.Controllers;
 using Tedarik.Web.Helpers;
 

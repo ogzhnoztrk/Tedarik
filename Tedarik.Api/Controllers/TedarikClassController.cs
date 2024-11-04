@@ -5,8 +5,9 @@ using Tedarik.Business.Abstract.Auth;
 using Tedarik.Core.Models;
 using Tedarik.Entities.Concrete;
 using Tedarik.Entities.Concrete.Auth;
+using Tedarik.Models.DTOs.Tedarik;
 
-namespace Tedarik.Api.Controllers.Auth
+namespace Tedarik.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,6 +30,11 @@ namespace Tedarik.Api.Controllers.Auth
         {
             return _service.GetAll();
         }
+        [HttpGet("getTedarikTablolarById")]
+        public Result<List<TedarikTabloDto>> getTedarikTablolarById()
+        {
+            return _service.getTedarikTablolarById();
+        }
 
         [HttpGet("GetById")]
         public Result<TedarikClass> GetById(string id)
@@ -36,7 +42,7 @@ namespace Tedarik.Api.Controllers.Auth
             return _service.GetById(id);
         }
 
-     
+
         [HttpPut]
         public Result<TedarikClass> Update(TedarikClass TedarikClass)
         {
@@ -49,7 +55,7 @@ namespace Tedarik.Api.Controllers.Auth
         {
             return _service.Delete(id);
         }
-      
+
 
     }
 }

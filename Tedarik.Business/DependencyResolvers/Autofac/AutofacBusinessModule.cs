@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tedarik.Business.Abstract;
 using Tedarik.Business.Abstract.Auth;
+using Tedarik.Business.Concrete;
 using Tedarik.Business.Concrete.Auth;
 using Tedarik.DataAccess.Repositories.Persistence;
 using Tedarik.Entities.Concrete;

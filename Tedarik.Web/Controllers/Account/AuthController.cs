@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using Tedarik.Models.VMs;
+using Tedarik.Models.VMs.Kullanici;
 using Tedarik.Web.Core.Controllers;
 using Tedarik.Web.Helpers;
 

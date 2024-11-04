@@ -408,13 +408,13 @@
 		/* Girdi alanlarının köşelerini kıvrımlı yap */
 	}
 
-	<link rel="stylesheet" href="./css/button.css" >
+
 </style>
 
 
 
 <body>
-	<form method="post">
+	<form method="post" asp-action="UpsertTedarik">
 		<div class="container container-1">
 		<input asp-for="Id" hidden/>
 			<h2> Tedarik Kısmı</h2>
@@ -422,135 +422,135 @@
 			<div class="form-row">
 				<div class="form-input">
 					<label required for="sno" asp-for="SNo">Sıra Numarası:</label>
-					<input required type="number" id="sno" name="sno" asp-for="SNo">
+					<input required type="number" id="sno" asp-for="SNo">
 				</div>
 				<div class="form-input">
 					<label for="almhtrtrh" asp-for="AlimMuhTarih">Alım Muhtırası Tarihi:</label>
-					<input required type="date" id="almhtrtrh" name="almhtrtrh" asp-for="AlimMuhTarih">
+					<input required type="date" id="almhtrtrh"  asp-for="AlimMuhTarih">
 				</div>
 				<div class="form-input">
 					<label for="almhtrno" asp-for="AlimMuhNo">Alım Muhtırası Numarası:</label>
-					<input required type="text" id="almhtrno" name="almhtrno" asp-for="AlimMuhNo">
+					<input required type="text" id="almhtrno" asp-for="AlimMuhNo">
 				</div>
 				<div class="form-input">
 					<label for="alemrno" asp-for="AlimEmriProNo">Alım Emri/Proje No:</label>
-					<input required type="text" id="alemrno" name="alemrno" asp-for="AlimEmriProNo">
+					<input required type="text" id="alemrno"  asp-for="AlimEmriProNo">
 				</div>
 				<div class="form-input">
 					<label for="prjyil" asp-for="ProjeYili">Proje Yılı:</label>
-					<input required type="date" id="prjyil" name="prjyil" asp-for="ProjeYili">
+					<input required type="date" id="prjyil"asp-for="ProjeYili">
 				</div>
 				<div class="form-input">
 					<label for="kategori" asp-for="Kategori">Kategori:</label>
-					<input required type="text" id="kategori" name="kategori" asp-for="Kategori">
+					<input required type="text" id="kategori" asp-for="Kategori">
 				</div>
 				<div class="form-input">
 					<label for="kuvvet" asp-for="Kuvvet">Kuvvet:</label>
-					<input required type="text" id="kuvvet" name="kuvvet" asp-for="Kuvvet">
+					<input required type="text" id="kuvvet"   asp-for="Kuvvet">
 				</div>
 				<div class="form-input">
 					<label for="mlzmadi" asp-for="MalzemeAdi">Malzeme Adı:</label>
-					<input required type="text" id="mlzmadi" name="mlzmadi" asp-for="MalzemeAdi">
+					<input required type="text" id="mlzmadi"  asp-for="MalzemeAdi">
 				</div>
 				<div class="form-input">
 					<label for="olcbrm" asp-for="OlcuBirimi">Ölçü Birimi:</label>
-					<input required type="text" id="olcbrm" name="olcbrm" asp-for="OlcuBirimi">
+					<input required type="text" id="olcbrm"  asp-for="OlcuBirimi">
 				</div>
 				<div class="form-input">
 					<label for="tplmksmmktr" asp-for="KisimMiktari">Toplam Kısım Miktarı:</label>
-					<input required type="number" id="tplmksmmktr" name="tplmksmmktr" asp-for="KisimMiktari">
+					<input required type="number" id="tplmksmmktr"  asp-for="KisimMiktari">
 				</div>
 				<div class="form-input">
 					<label for="ksmnmr" asp-for="KisimNumarasi">Kısım Numarası:</label>
-					<input required type="number" id="ksmnmr" name="ksmnmr" asp-for="KisimNumarasi">
+					<input required type="number" id="ksmnmr"  asp-for="KisimNumarasi">
 				</div>
 				<div class="form-input">
 					<label for="tkstsys" asp-for="TaksitMiktari">Taksit Sayısı:</label>
-					<input required type="number" id="tkstsys" name="tkstsys" asp-for="TaksitMiktari">
+					<input required type="number" id="tkstsys"   asp-for="TaksitMiktari">
 				</div>
 				<div class="form-input">
 					<label for="tkstno" asp-for="TaksitNumarasi">Taksit Numarası:</label>
-					<input  type="number" id="tkstno" name="tkstno" asp-for="TaksitNumarasi">
+					<input  type="number" id="tkstno"  asp-for="TaksitNumarasi">
 				</div>
 				<div class="form-input">
 					<label for="tkstmktr" asp-for="TaksitMiktari">Taksit Miktarı:</label>
-					<input  type="number" id="tkstmktr" name="tkstmktr" asp-for="TaksitMiktari">
+					<input  type="number" id="tkstmktr"   asp-for="TaksitMiktari">
 				</div>
 				<div class="form-input">
 					<label for="tplmalmmktr" asp-for="ToplamAlimMiktari">Toplam Alım Miktarı:</label>
-					<input  type="number" id="tplmalmmktr" name="tplmalmmktr" asp-for="ToplamAlimMiktari">
+					<input  type="number" id="tplmalmmktr"  asp-for="ToplamAlimMiktari">
 				</div>
 				<div class="form-input">
 					<label for="ihlalmusl" asp-for="IhAlimUsul">İhale Alım Usulü:</label>
-					<input  type="text" id="ihlalmusl" name="ihlalmusl" asp-for="IhAlimUsul">
+					<input  type="text" id="ihlalmusl"   asp-for="IhAlimUsul">
 				</div>
 				<div class="form-input">
 					<label for="yklmlytgdstrh" asp-for="YaklasikgidisTarihi">Yaklaşık Maliyete Gidiş Tarihi:</label>
-					<input  type="date" id="yklmlytgdstrh" name="yklmlytgdstrh" asp-for="YaklasikgidisTarihi">
+					<input  type="date" id="yklmlytgdstrh"   asp-for="YaklasikgidisTarihi">
 				</div>
 				<div class="form-input">
 					<label for="yklmlytdnstrh" asp-for="YaklasikdonusTarihi">Yaklaşık Maliyetten Dönüş Tarihi:</label>
-					<input required type="date" id="yklmlytdnstrh" name="yklmlytdnstrh" asp-for="YaklasikdonusTarihi">
+					<input required type="date" id="yklmlytdnstrh"  asp-for="YaklasikdonusTarihi">
 				</div>
 				<div class="form-input">
 					<label for="ihltrh" asp-for="IhaleTarihi">İhale/Alım Tarihi:</label>
-					<input required type="date" id="ihltrh" name="ihltrh" asp-for="IhaleTarihi">
+					<input required type="date" id="ihltrh"  asp-for="IhaleTarihi">
 				</div>
 				<div class="form-input">
 					<label for="krrtrh" asp-for="KararTarihi">Karar Tarihi:</label>
-					<input required type="date" id="krrtrh" name="krrtrh" asp-for="KararTarihi">
+					<input required type="date" id="krrtrh"   asp-for="KararTarihi">
 				</div>
 				<div class="form-input">
 					<label for="brmfyt" asp-for="BirimFiyati">Birim Fiyat:</label>
-					<input required type="number" id="brmfyt" name="brmfyt" asp-for="BirimFiyati">
+					<input required type="number" id="brmfyt"  asp-for="BirimFiyati">
 				</div>
 				<div class="form-input">
 					<label for="krrtutr" asp-for="KararTutari">Karar Tutarı:</label>
-					<input required type="number" id="krrtutr" name="krrtutr" asp-for="KararTutari">
+					<input required type="number" id="krrtutr" asp-for="KararTutari">
 				</div>
 				<div class="form-input">
 					<label for="krrtbltrh" asp-for="KararTebligTarih">Karar Tebliğ Tarihi:</label>
-					<input required type="date" id="krrtbltrh" name="krrtbltrh" asp-for="KararTebligTarih">
+					<input required type="date" id="krrtbltrh"  asp-for="KararTebligTarih">
 				</div>
 
 
 
 				<div class="form-input">
 					<label for="szlsmdvttrh" asp-for="SozlesmeDavetTarihi">Sözleşme Davet Tarihi:</label>
-					<input required type="date" id="szlsmdvttrh" name="szlsmdvttrh" asp-for="SozlesmeDavetTarihi">
+					<input required type="date" id="szlsmdvttrh"  asp-for="SozlesmeDavetTarihi">
 				</div>
 				<div class="form-input">
 					<label for="szlsmtrh" asp-for="SozlesmeTarihi">Sözleşme Tarihi:</label>
-					<input required type="date" asp-for="SozlesmeTarihi" id="szlsmtrh" name="szlsmtrh">
+					<input required type="date" asp-for="SozlesmeTarihi" id="szlsmtrh" >
 				</div>
 				<div class="form-input">
 					<label for="szlsmno" asp-for="SozlesmeNo">Sözleşme Numarası:</label>
-					<input required type="text" asp-for="SozlesmeNo" id="szlsmno" name="szlsmno">
+					<input required type="text" asp-for="SozlesmeNo" id="szlsmno" >
 				</div>
 				<div class="form-input">
 					<label for="yukleyici" asp-for="Yukleyici">Yükleyici:</label>
-					<input required type="text" asp-for="Yukleyici" id="yukleyici" name="yukleyici">
+					<input required type="text" asp-for="Yukleyici" id="yukleyici" >
 				</div>
 				<div class="form-input">
 					<label for="tslsrbsltrh" asp-for="TeslimBaslangicTarih">Teslim Süresi Başlangıç Tarihi:</label>
-					<input required type="date" asp-for="TeslimBaslangicTarih" id="tslsrbsltrh" name="tslsrbsltrh">
+					<input required type="date" asp-for="TeslimBaslangicTarih" id="tslsrbsltrh" >
 				</div>
 
 				<div class="form-input">
 					<label for="tslsrbtstrh" asp-for="TeslimBitisTarih">Teslim Süresi Bitiş Tarihi:</label>
-					<input required type="date" asp-for="TeslimBitisTarih" id="tslsrbtstrh" name="tslsrbtstrh">
+					<input required type="date" asp-for="TeslimBitisTarih" id="tslsrbtstrh" >
 				</div>
 				<div class="form-input">
 					<label for="ktikbltrh" asp-for="KatiKabulTarihi">Kati Kabul Tarihi:</label>
-					<input required type="date" asp-for="KatiKabulTarihi" id="ktikbltrh" name="ktikbltrh">
+					<input required type="date" asp-for="KatiKabulTarihi" id="ktikbltrh" >
 				</div>
 				<div class="form-input">
 					<label for="aciklama" asp-for="Aciklama">Açıklama:</label>
-					<input required type="text" asp-for="Aciklama" id="aciklama" name="aciklama">
+					<input required type="text" asp-for="Aciklama" id="aciklama" >
 				</div>
 				<div class="form-input">
 					<label for="prjsrmlsu" asp-for="ProjeSorumlusu">Proje Sorumlusu:</label>
-					<input required type="text" asp-for="ProjeSorumlusu" id="prjsrmlsu" name="prjsrmlsu">
+					<input required type="text" asp-for="ProjeSorumlusu" id="prjsrmlsu" >
 				</div>
 			</div>
 		</div>
