@@ -416,11 +416,12 @@
 <body>
 	<form method="post">
 		<div class="container container-1">
+		<input asp-for="Id" hidden/>
 			<h2> Tedarik Kısmı</h2>
 
 			<div class="form-row">
 				<div class="form-input">
-					<label for="sno" asp-for="SNo">Sıra Numarası:</label>
+					<label required for="sno" asp-for="SNo">Sıra Numarası:</label>
 					<input required type="number" id="sno" name="sno" asp-for="SNo">
 				</div>
 				<div class="form-input">
@@ -469,23 +470,23 @@
 				</div>
 				<div class="form-input">
 					<label for="tkstno" asp-for="TaksitNumarasi">Taksit Numarası:</label>
-					<input required type="number" id="tkstno" name="tkstno" asp-for="TaksitNumarasi">
+					<input  type="number" id="tkstno" name="tkstno" asp-for="TaksitNumarasi">
 				</div>
 				<div class="form-input">
 					<label for="tkstmktr" asp-for="TaksitMiktari">Taksit Miktarı:</label>
-					<input required type="number" id="tkstmktr" name="tkstmktr" asp-for="TaksitMiktari">
+					<input  type="number" id="tkstmktr" name="tkstmktr" asp-for="TaksitMiktari">
 				</div>
 				<div class="form-input">
 					<label for="tplmalmmktr" asp-for="ToplamAlimMiktari">Toplam Alım Miktarı:</label>
-					<input required type="number" id="tplmalmmktr" name="tplmalmmktr" asp-for="ToplamAlimMiktari">
+					<input  type="number" id="tplmalmmktr" name="tplmalmmktr" asp-for="ToplamAlimMiktari">
 				</div>
 				<div class="form-input">
 					<label for="ihlalmusl" asp-for="IhAlimUsul">İhale Alım Usulü:</label>
-					<input required type="text" id="ihlalmusl" name="ihlalmusl" asp-for="IhAlimUsul">
+					<input  type="text" id="ihlalmusl" name="ihlalmusl" asp-for="IhAlimUsul">
 				</div>
 				<div class="form-input">
 					<label for="yklmlytgdstrh" asp-for="YaklasikgidisTarihi">Yaklaşık Maliyete Gidiş Tarihi:</label>
-					<input required type="date" id="yklmlytgdstrh" name="yklmlytgdstrh" asp-for="YaklasikgidisTarihi">
+					<input  type="date" id="yklmlytgdstrh" name="yklmlytgdstrh" asp-for="YaklasikgidisTarihi">
 				</div>
 				<div class="form-input">
 					<label for="yklmlytdnstrh" asp-for="YaklasikdonusTarihi">Yaklaşık Maliyetten Dönüş Tarihi:</label>
@@ -559,33 +560,33 @@
 			<div class="form-row">
 				<div class="form-input">
 					<label for="onckialmtrh" asp-for="OncekiAlimTarihi">Önceki Alım Tarihi:</label>
-					<input required type="date" asp-for="OncekiAlimTarihi" id="onckialmtrh" name="onckialmtrh">
+					<input  type="date" asp-for="OncekiAlimTarihi" id="onckialmtrh" name="onckialmtrh">
 				</div>
 				<div class="form-input">
 					<label for="onkcialmypnblge" asp-for="OncekiAlimBolge">Önceki Alım Yapan Bölge:</label>
-					<input required type="text" asp-for="OncekiAlimBolge" id="onkcialmypnblge" name="onkcialmypnblge">
+					<input  type="text" asp-for="OncekiAlimBolge" id="onkcialmypnblge" name="onkcialmypnblge">
 				</div>
 
 				<div class="form-input">
 					<label for="oncalmmktr" asp-for="OncekiAlimMiktar">Önceki Alım Miktarı:</label>
-					<input required type="number" asp-for="OncekiAlimMiktar" id="oncalmmktr" name="oncalmmktr">
+					<input  type="number" asp-for="OncekiAlimMiktar" id="oncalmmktr" name="oncalmmktr">
 				</div>
 				<div class="form-input">
 					<label for="oncalmfyt" asp-for="OncekiAlimFiyat">Önceki Alım Fiyatı:</label>
-					<input required type="number" asp-for="OncekiAlimFiyat" id="oncalmfyt" name="oncalmfyt">
+					<input  type="number" asp-for="OncekiAlimFiyat" id="oncalmfyt" name="oncalmfyt">
 				</div>
 				<div class="form-input">
 					<label for="ufe" asp-for="Ufe">ÜFE:</label>
-					<input required type="number" asp-for="Ufe" id="ufe" name="ufe">
+					<input  type="number" asp-for="Ufe" id="ufe" name="ufe">
 				</div>
 
 				<div class="form-input">
 					<label for="gnclbrmfyt" asp-for="GuncelBirimFiyat">Güncel Birim Fiyatı:</label>
-					<input required type="number" asp-for="GuncelBirimFiyat" id="gnclbrmfyt" name="gnclbrmfyt">
+					<input  type="number" asp-for="GuncelBirimFiyat" id="gnclbrmfyt" name="gnclbrmfyt">
 				</div>
 				<div class="form-input">
 					<label for="gncltutr" asp-for="GuncelTutar">Güncel Tutar:</label>
-					<input required type="number" asp-for="GuncelTutar" id="gncltutr" name="gncltutr">
+					<input  type="number" asp-for="GuncelTutar" id="gncltutr" name="gncltutr">
 				</div>
 			</div>
 		</div>
@@ -596,19 +597,19 @@
 
 				<div class="form-input">
 					<label for="mltslmtrh" asp-for="MalTeslimTarihi">Mal Teslim Tarihi:</label>
-					<input required type="date" asp-for="MalTeslimTarihi" id="mltslmtrh" name="mltslmtrh">
+					<input  type="date" asp-for="MalTeslimTarihi" id="mltslmtrh" name="mltslmtrh">
 				</div>
 				<div class="form-input">
 					<label for="mhtrtrh" asp-for="MuhtiraTarih">Muhtıra Tarihi:</label>
-					<input required type="date" asp-for="MuhtiraTarih" id="mhtrtrh" name="mhtrtrh">
+					<input  type="date" asp-for="MuhtiraTarih" id="mhtrtrh" name="mhtrtrh">
 				</div>
 				<div class="form-input">
 					<label for="tsnrmlislmblgtrh" asp-for="TasinirkesilmeTarihi">Taşınır Mal İşlem Belgesi Tarihi:</label>
-					<input required type="date" asp-for="TasinirkesilmeTarihi" id="tsnrmlislmblgtrh" name="tsnrmlislmblgtrh">
+					<input  type="date" asp-for="TasinirkesilmeTarihi" id="tsnrmlislmblgtrh" name="tsnrmlislmblgtrh">
 				</div>
 				<div class="form-input">
 					<label for="ikmmkzsvktrh" asp-for="IkmalSevkTarih">İkmal Merkezine Sevk Tarihi:</label>
-					<input required type="date" id="ikmmkzsvktrh" asp-for="IkmalSevkTarih" name="ikmmkzsvktrh">
+					<input  type="date" id="ikmmkzsvktrh" asp-for="IkmalSevkTarih" name="ikmmkzsvktrh">
 				</div>
 			</div>
 		</div>
@@ -618,64 +619,64 @@
 			<div class="form-row">
 				<div class="form-input">
 					<label for="mhtralmtrh" asp-for="MuhtiraAlimTarihi">Muhtıra Alım Tarihi:</label>
-					<input required type="date" asp-for="MuhtiraAlimTarihi" id="mhtralmtrh" name="mhtralmtrh">
+					<input  type="date" asp-for="MuhtiraAlimTarihi" id="mhtralmtrh" name="mhtralmtrh">
 				</div>
 				<div class="form-input">
 					<label for="myntblgtrh" asp-for="MuaTebligTarihi">Muayene Tebliğ Tarihi:</label>
-					<input required type="date" asp-for="MuaTebligTarihi" id="myntblgtrh" name="myntblgtrh">
+					<input  type="date" asp-for="MuaTebligTarihi" id="myntblgtrh" name="myntblgtrh">
 				</div>
 				<div class="form-input">
 					<label for="mynbskn" asp-for="MuaKomisyonBaskani">Muayene Komisyonu Başkanı:</label>
-					<input required type="text" asp-for="MuaKomisyonBaskani" id="mynbskn" name="mynbskn">
+					<input  type="text" asp-for="MuaKomisyonBaskani" id="mynbskn" name="mynbskn">
 				</div>
 				<div class="form-input">
 					<label for="mynuye1" asp-for="MuaUye1">Muayene Üye 1:</label>
-					<input required type="text" asp-for="MuaUye1" id="mynuye1" name="mynuye1">
+					<input  type="text" asp-for="MuaUye1" id="mynuye1" name="mynuye1">
 				</div>
 				<div class="form-input">
 					<label for="mynuye2" asp-for="MuaUye2">Muayene Üye 2:</label>
-					<input required type="text" id="mynuye2" asp-for="MuaUye2" name="mynuye2">
+					<input  type="text" id="mynuye2" asp-for="MuaUye2" name="mynuye2">
 				</div>
 				<div class="form-input">
 					<label for="mynuye3" asp-for="MuaUye3">Muayene Üye 3:</label>
-					<input required type="text" id="mynuye3" asp-for="MuaUye3" name="mynuye3">
+					<input  type="text" id="mynuye3" asp-for="MuaUye3" name="mynuye3">
 				</div>
 				<div class="form-input">
 					<label for="mlsrmlsu" asp-for="MalSorumlusu">Mal Sorumlusu:</label>
-					<input required type="text" asp-for="MalSorumlusu" id="mlsrmlsu" name="mlsrmlsu">
+					<input  type="text" asp-for="MalSorumlusu" id="mlsrmlsu" name="mlsrmlsu">
 				</div>
 				<div class="form-input">
 					<label for="gckmesbebi" asp-for="GecikmeSebebi">Varsa Gecikme Sebebi:</label>
-					<input required type="text" asp-for="GecikmeSebebi" id="gckmesbebi" name="gckmesbebi">
+					<input  type="text" asp-for="GecikmeSebebi" id="gckmesbebi" name="gckmesbebi">
 				</div>
 				<div class="form-input">
 					<label for="fzkmyntrh" asp-for="FizikselMuaTarih">Fiziksel Muayene Tarihi:</label>
-					<input required type="date" asp-for="FizikselMuaTarih" id="fzkmyntrh" name="fzkmyntrh">
+					<input  type="date" asp-for="FizikselMuaTarih" id="fzkmyntrh" name="fzkmyntrh">
 				</div>
 				<div class="form-input">
 					<label for="fzkmynsnc" asp-for="FizikselMuaSonuc">Fiziksel Muayene Sonucu:</label>
-					<input required type="text" asp-for="FizikselMuaSonuc" id="fzkmynsnc" name="fzkmynsnc">
+					<input  type="text" asp-for="FizikselMuaSonuc" id="fzkmynsnc" name="fzkmynsnc">
 				</div>
 				<div class="form-input">
 					<label for="labgdstrh" asp-for="LabGidisTarihi">Labaratuvara Gidiş Tarihi:</label>
-					<input required type="date" asp-for="LabGidisTarihi" id="labgdstrh" name="labgdstrh">
+					<input  type="date" asp-for="LabGidisTarihi" id="labgdstrh" name="labgdstrh">
 				</div>
 				<div class="form-input">
 					<label for="labdnstrh" asp-for="LabDonusTarihi">Labaratuvardan Dönüş Tarihi:</label>
-					<input required type="date" asp-for="LabDonusTarihi" id="labdnstrh" name="labdnstrh">
+					<input  type="date" asp-for="LabDonusTarihi" id="labdnstrh" name="labdnstrh">
 				</div>
 
 				<div class="form-input">
 					<label for="mynkrrtrh" asp-for="MuakararTarihi">Muayene Karar Tarihi:</label>
-					<input required type="date" asp-for="MuakararTarihi" id="mynkrrtrh" name="mynkrrtrh">
+					<input  type="date" asp-for="MuakararTarihi" id="mynkrrtrh" name="mynkrrtrh">
 				</div>
 				<div class="form-input">
 					<label for="mynsnc" asp-for="MuaSonuc">Muayene Sonucu:</label>
-					<input required type="text" asp-for="MuaSonuc" id="mynsnc" name="mynsnc">
+					<input  type="text" asp-for="MuaSonuc" id="mynsnc" name="mynsnc">
 				</div>
 				<div class="form-input">
 					<label for="mynaciklama" asp-for="MuaAciklamasi">Muayene Açıklaması:</label>
-					<input required type="text" asp-for="MuaAciklamasi" id="mynaciklama" name="mynaciklama">
+					<input  type="text" asp-for="MuaAciklamasi" id="mynaciklama" name="mynaciklama">
 				</div>
 				<!-- Diğer 53 alan buraya eklenebilir -->
 			</div>
