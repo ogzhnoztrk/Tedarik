@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tedarik.Entities.Concrete.Auth
 {
+    [Table("TBL_KULLANICILAR")]
     public class Kullanici
     {
         [Column("kllnc_id")]

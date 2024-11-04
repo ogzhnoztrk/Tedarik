@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tedarik.DataAccess.Context;
 
@@ -11,9 +12,10 @@ using Tedarik.DataAccess.Context;
 namespace Tedarik.DataAccess.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    partial class SqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241104111742_tedarikler_update_mig")]
+    partial class tedarikler_update_mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

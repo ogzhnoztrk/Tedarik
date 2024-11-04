@@ -1,0 +1,703 @@
+﻿@using Tedarik.Entities.Concrete
+@model TedarikClass
+
+@{
+	ViewData["Title"] = "UpsertTedarik";
+	Layout = "~/Views/Shared/_TedarikLayout.cshtml";
+}
+
+
+
+<style>
+	.button {
+		--background: #2B3044;
+		--background-hover: #2B3044;
+		--text: #fff;
+		--shadow: rgba(0, 9, 61, .2);
+		--paper: #5C86FF;
+		--paper-lines: #fff;
+		--trash: #2B3044;
+		--trash-lines: #2B3044;
+		--check: #fff;
+		--check-background: #5C86FF;
+		position: relative;
+		border: none;
+		outline: none;
+		background: none;
+		padding: 10px 24px;
+		border-radius: 7px;
+		min-width: 142px;
+		-webkit-appearance: none;
+		-webkit-tap-highlight-color: transparent;
+		cursor: pointer;
+		display: flex;
+		color: var(--text);
+		background: var(--btn, var(--background));
+		box-shadow: 0 var(--shadow-y, 4px) var(--shadow-blur, 8px) var(--shadow);
+		transform: scale(var(--scale, 1));
+		transition: transform .3s, box-shadow .3s, background .3s;
+		span
+
+	{
+		display: block;
+		font-size: 14px;
+		line-height: 25px;
+		font-weight: 600;
+		opacity: var(--span-opacity, 1);
+		transform: translateX(var(--span-x, 0)) translateZ(0);
+		transition: transform .4s ease var(--span-delay, .2s), opacity .3s ease var(--span-delay, .2s);
+	}
+
+	.trash {
+		display: block;
+		position: relative;
+		left: -8px;
+		transform: translate(var(--trash-x, 0), var(--trash-y, 1px)) translateZ(0) scale(var(--trash-scale, .64));
+		transition: transform .5s;
+		&:before, &:after
+
+	{
+		content: '';
+		position: absolute;
+		height: 8px;
+		width: 2px;
+		border-radius: 1px;
+		background: var(--icon, var(--trash));
+		bottom: 100%;
+		transform-origin: 50% 6px;
+		transform: translate(var(--x, 3px), 2px) scaleY(var(--sy, .7)) rotate(var(--r, 0deg));
+		transition: transform .4s, background .3s;
+	}
+
+	&:before {
+		left: 1px;
+	}
+
+	&:after {
+		right: 1px;
+		--x: -3px;
+	}
+
+	.top {
+		position: absolute;
+		overflow: hidden;
+		left: -4px;
+		right: -4px;
+		bottom: 100%;
+		height: 40px;
+		z-index: 1;
+		transform: translateY(2px);
+		&:before, &:after
+
+	{
+		content: '';
+		position: absolute;
+		border-radius: 1px;
+		background: var(--icon, var(--trash));
+		width: var(--w, 12px);
+		height: var(--h, 2px);
+		left: var(--l, 8px);
+		bottom: var(--b, 5px);
+		transition: background .3s, transform .4s;
+	}
+
+	&:after {
+		--w: 28px;
+		--h: 2px;
+		--l: 0;
+		--b: 0;
+		transform: scaleX(var(--trash-line-scale, 1));
+	}
+
+	.paper {
+		width: 14px;
+		height: 18px;
+		background: var(--paper);
+		left: 7px;
+		bottom: 0;
+		border-radius: 1px;
+		position: absolute;
+		transform: translateY(-16px);
+		opacity: 0;
+		&:before, &:after
+
+	{
+		content: '';
+		width: var(--w, 10px);
+		height: 2px;
+		border-radius: 1px;
+		position: absolute;
+		left: 2px;
+		top: var(--t, 2px);
+		background: var(--paper-lines);
+		transform: scaleY(.7);
+		box-shadow: 0 9px 0 var(--paper-lines);
+	}
+
+	&:after {
+		--t: 5px;
+		--w: 7px;
+	}
+
+	}
+	}
+
+	.box {
+		width: 20px;
+		height: 25px;
+		border: 2px solid var(--icon, var(--trash));
+		border-radius: 1px 1px 4px 4px;
+		position: relative;
+		overflow: hidden;
+		z-index: 2;
+		transition: border-color .3s;
+		&:before, &:after
+
+	{
+		content: '';
+		position: absolute;
+		width: 4px;
+		height: var(--h, 20px);
+		top: 0;
+		left: var(--l, 50%);
+		background: var(--b, var(--trash-lines));
+	}
+
+	&:before {
+		border-radius: 2px;
+		margin-left: -2px;
+		transform: translateX(-3px) scale(.6);
+		box-shadow: 10px 0 0 var(--trash-lines);
+		opacity: var(--trash-lines-opacity, 1);
+		transition: transform .4s, opacity .4s;
+	}
+
+	&:after {
+		--h: 16px;
+		--b: var(--paper);
+		--l: 1px;
+		transform: translate(-.5px, -16px) scaleX(.5);
+		box-shadow: 7px 0 0 var(--paper), 14px 0 0 var(--paper), 21px 0 0 var(--paper);
+	}
+
+	}
+
+	.check {
+		padding: 4px 3px;
+		border-radius: 50%;
+		background: var(--check-background);
+		position: absolute;
+		left: 2px;
+		top: 24px;
+		opacity: var(--check-opacity, 0);
+		transform: translateY(var(--check-y, 0)) scale(var(--check-scale, .2));
+		transition: transform var(--check-duration, .2s) ease var(--check-delay, 0s), opacity var(--check-duration-opacity, .2s) ease var(--check-delay, 0s);
+		svg
+
+	{
+		width: 8px;
+		height: 6px;
+		display: block;
+		fill: none;
+		stroke-width: 1.5;
+		stroke-dasharray: 9px;
+		stroke-dashoffset: var(--check-offset, 9px);
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke: var(--check);
+		transition: stroke-dashoffset .4s ease var(--checkmark-delay, .4s);
+	}
+
+	}
+	}
+
+	&.delete {
+		--span-opacity: 0;
+		--span-x: 16px;
+		--span-delay: 0s;
+		--trash-x: 46px;
+		--trash-y: 2px;
+		--trash-scale: 1;
+		--trash-lines-opacity: 0;
+		--trash-line-scale: 0;
+		--icon: #fff;
+		--check-offset: 0;
+		--check-opacity: 1;
+		--check-scale: 1;
+		--check-y: 16px;
+		--check-delay: 1.7s;
+		--checkmark-delay: 2.1s;
+		--check-duration: .55s;
+		--check-duration-opacity: .3s;
+		.trash
+
+	{
+		&:before, &:after
+
+	{
+		--sy: 1;
+		--x: 0;
+	}
+
+	&:before {
+		--r: 40deg;
+	}
+
+	&:after {
+		--r: -40deg;
+	}
+
+	.top {
+		.paper
+
+	{
+		animation: paper 1.5s linear forwards .5s;
+	}
+
+	}
+
+	.box {
+		&:after
+
+	{
+		animation: cut 1.5s linear forwards .5s;
+	}
+
+	}
+	}
+	}
+
+	&.delete,
+	&:hover {
+		--btn: var(--background-hover);
+		--shadow-y: 5px;
+		--shadow-blur: 9px;
+	}
+
+	&:active {
+		--shadow-y: 2px;
+		--shadow-blur: 5px;
+		--scale: .94;
+	}
+
+	}
+	<!--
+	keyframes paper {
+		10%, 100%
+
+	{
+		opacity: 1;
+	}
+
+	20% {
+		transform: translateY(-16px);
+	}
+
+	40% {
+		transform: translateY(0);
+	}
+
+	70%, 100% {
+		transform: translateY(24px);
+	}
+
+	}
+
+	keyframes cut {
+		0%, 40%
+
+	{
+	}
+
+	100% {
+	}
+
+	}
+	-->
+	button {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	* {
+		box-sizing: inherit;
+		&:before, &:after
+
+	{
+		box-sizing: inherit;
+	}
+
+	}
+
+
+	.twitter {
+		position: fixed;
+		display: block;
+		right: 16px;
+		bottom: 16px;
+		svg
+
+	{
+		width: 32px;
+		height: 32px;
+		fill: #1da1f2;
+	}
+
+	}
+
+	body {
+		font-family: Arial, sans-serif;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0;
+		padding: 20px;
+	}
+
+	.container {
+		width: 100%;
+		margin: 20px 0;
+		padding: 20px;
+		border-radius: 12px;
+		/* Köşeleri kıvrımlı yap */
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.container-1 {
+		background-color: #f8d7da;
+	}
+
+	.container-2 {
+		background-color: #d1ecf1;
+	}
+
+	.container-3 {
+		background-color: #d4edda;
+	}
+
+	.container-4 {
+		background-color: #fff3cd;
+	}
+
+	.form-row {
+		display: flex;
+		flex-wrap: wrap;
+		/* Alt satıra geçişi sağla */
+		margin-bottom: 20px;
+		/* Alanlar arasında boşluk artır */
+	}
+
+	.form-input {
+		flex: 1 1 calc(33% - 25px);
+		/* Yan yana 3 alan, aralarında boşluk bırak */
+		margin: 12px;
+		/* Alanlar arasındaki boşluk */
+	}
+
+	label {
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	input {
+		width: 100%;
+		padding: 10px;
+		/* İç boşluk artır */
+		border: 1px solid #ccc;
+		border-radius: 8px;
+		/* Girdi alanlarının köşelerini kıvrımlı yap */
+	}
+
+	<link rel="stylesheet" href="./css/button.css" >
+</style>
+
+
+
+<body>
+	<form method="post">
+		<div class="container container-1">
+			<h2> Tedarik Kısmı</h2>
+
+			<div class="form-row">
+				<div class="form-input">
+					<label for="sno" asp-for="SNo">Sıra Numarası:</label>
+					<input required type="number" id="sno" name="sno" asp-for="SNo">
+				</div>
+				<div class="form-input">
+					<label for="almhtrtrh" asp-for="AlimMuhTarih">Alım Muhtırası Tarihi:</label>
+					<input required type="date" id="almhtrtrh" name="almhtrtrh" asp-for="AlimMuhTarih">
+				</div>
+				<div class="form-input">
+					<label for="almhtrno" asp-for="AlimMuhNo">Alım Muhtırası Numarası:</label>
+					<input required type="text" id="almhtrno" name="almhtrno" asp-for="AlimMuhNo">
+				</div>
+				<div class="form-input">
+					<label for="alemrno" asp-for="AlimEmriProNo">Alım Emri/Proje No:</label>
+					<input required type="text" id="alemrno" name="alemrno" asp-for="AlimEmriProNo">
+				</div>
+				<div class="form-input">
+					<label for="prjyil" asp-for="ProjeYili">Proje Yılı:</label>
+					<input required type="date" id="prjyil" name="prjyil" asp-for="ProjeYili">
+				</div>
+				<div class="form-input">
+					<label for="kategori" asp-for="Kategori">Kategori:</label>
+					<input required type="text" id="kategori" name="kategori" asp-for="Kategori">
+				</div>
+				<div class="form-input">
+					<label for="kuvvet" asp-for="Kuvvet">Kuvvet:</label>
+					<input required type="text" id="kuvvet" name="kuvvet" asp-for="Kuvvet">
+				</div>
+				<div class="form-input">
+					<label for="mlzmadi" asp-for="MalzemeAdi">Malzeme Adı:</label>
+					<input required type="text" id="mlzmadi" name="mlzmadi" asp-for="MalzemeAdi">
+				</div>
+				<div class="form-input">
+					<label for="olcbrm" asp-for="OlcuBirimi">Ölçü Birimi:</label>
+					<input required type="text" id="olcbrm" name="olcbrm" asp-for="OlcuBirimi">
+				</div>
+				<div class="form-input">
+					<label for="tplmksmmktr" asp-for="KisimMiktari">Toplam Kısım Miktarı:</label>
+					<input required type="number" id="tplmksmmktr" name="tplmksmmktr" asp-for="KisimMiktari">
+				</div>
+				<div class="form-input">
+					<label for="ksmnmr" asp-for="KisimNumarasi">Kısım Numarası:</label>
+					<input required type="number" id="ksmnmr" name="ksmnmr" asp-for="KisimNumarasi">
+				</div>
+				<div class="form-input">
+					<label for="tkstsys" asp-for="TaksitMiktari">Taksit Sayısı:</label>
+					<input required type="number" id="tkstsys" name="tkstsys" asp-for="TaksitMiktari">
+				</div>
+				<div class="form-input">
+					<label for="tkstno" asp-for="TaksitNumarasi">Taksit Numarası:</label>
+					<input required type="number" id="tkstno" name="tkstno" asp-for="TaksitNumarasi">
+				</div>
+				<div class="form-input">
+					<label for="tkstmktr" asp-for="TaksitMiktari">Taksit Miktarı:</label>
+					<input required type="number" id="tkstmktr" name="tkstmktr" asp-for="TaksitMiktari">
+				</div>
+				<div class="form-input">
+					<label for="tplmalmmktr" asp-for="ToplamAlimMiktari">Toplam Alım Miktarı:</label>
+					<input required type="number" id="tplmalmmktr" name="tplmalmmktr" asp-for="ToplamAlimMiktari">
+				</div>
+				<div class="form-input">
+					<label for="ihlalmusl" asp-for="IhAlimUsul">İhale Alım Usulü:</label>
+					<input required type="text" id="ihlalmusl" name="ihlalmusl" asp-for="IhAlimUsul">
+				</div>
+				<div class="form-input">
+					<label for="yklmlytgdstrh" asp-for="YaklasikgidisTarihi">Yaklaşık Maliyete Gidiş Tarihi:</label>
+					<input required type="date" id="yklmlytgdstrh" name="yklmlytgdstrh" asp-for="YaklasikgidisTarihi">
+				</div>
+				<div class="form-input">
+					<label for="yklmlytdnstrh" asp-for="YaklasikdonusTarihi">Yaklaşık Maliyetten Dönüş Tarihi:</label>
+					<input required type="date" id="yklmlytdnstrh" name="yklmlytdnstrh" asp-for="YaklasikdonusTarihi">
+				</div>
+				<div class="form-input">
+					<label for="ihltrh" asp-for="IhaleTarihi">İhale/Alım Tarihi:</label>
+					<input required type="date" id="ihltrh" name="ihltrh" asp-for="IhaleTarihi">
+				</div>
+				<div class="form-input">
+					<label for="krrtrh" asp-for="KararTarihi">Karar Tarihi:</label>
+					<input required type="date" id="krrtrh" name="krrtrh" asp-for="KararTarihi">
+				</div>
+				<div class="form-input">
+					<label for="brmfyt" asp-for="BirimFiyati">Birim Fiyat:</label>
+					<input required type="number" id="brmfyt" name="brmfyt" asp-for="BirimFiyati">
+				</div>
+				<div class="form-input">
+					<label for="krrtutr" asp-for="KararTutari">Karar Tutarı:</label>
+					<input required type="number" id="krrtutr" name="krrtutr" asp-for="KararTutari">
+				</div>
+				<div class="form-input">
+					<label for="krrtbltrh" asp-for="KararTebligTarih">Karar Tebliğ Tarihi:</label>
+					<input required type="date" id="krrtbltrh" name="krrtbltrh" asp-for="KararTebligTarih">
+				</div>
+
+
+
+				<div class="form-input">
+					<label for="szlsmdvttrh" asp-for="SozlesmeDavetTarihi">Sözleşme Davet Tarihi:</label>
+					<input required type="date" id="szlsmdvttrh" name="szlsmdvttrh" asp-for="SozlesmeDavetTarihi">
+				</div>
+				<div class="form-input">
+					<label for="szlsmtrh" asp-for="SozlesmeTarihi">Sözleşme Tarihi:</label>
+					<input required type="date" asp-for="SozlesmeTarihi" id="szlsmtrh" name="szlsmtrh">
+				</div>
+				<div class="form-input">
+					<label for="szlsmno" asp-for="SozlesmeNo">Sözleşme Numarası:</label>
+					<input required type="text" asp-for="SozlesmeNo" id="szlsmno" name="szlsmno">
+				</div>
+				<div class="form-input">
+					<label for="yukleyici" asp-for="Yukleyici">Yükleyici:</label>
+					<input required type="text" asp-for="Yukleyici" id="yukleyici" name="yukleyici">
+				</div>
+				<div class="form-input">
+					<label for="tslsrbsltrh" asp-for="TeslimBaslangicTarih">Teslim Süresi Başlangıç Tarihi:</label>
+					<input required type="date" asp-for="TeslimBaslangicTarih" id="tslsrbsltrh" name="tslsrbsltrh">
+				</div>
+
+				<div class="form-input">
+					<label for="tslsrbtstrh" asp-for="TeslimBitisTarih">Teslim Süresi Bitiş Tarihi:</label>
+					<input required type="date" asp-for="TeslimBitisTarih" id="tslsrbtstrh" name="tslsrbtstrh">
+				</div>
+				<div class="form-input">
+					<label for="ktikbltrh" asp-for="KatiKabulTarihi">Kati Kabul Tarihi:</label>
+					<input required type="date" asp-for="KatiKabulTarihi" id="ktikbltrh" name="ktikbltrh">
+				</div>
+				<div class="form-input">
+					<label for="aciklama" asp-for="Aciklama">Açıklama:</label>
+					<input required type="text" asp-for="Aciklama" id="aciklama" name="aciklama">
+				</div>
+				<div class="form-input">
+					<label for="prjsrmlsu" asp-for="ProjeSorumlusu">Proje Sorumlusu:</label>
+					<input required type="text" asp-for="ProjeSorumlusu" id="prjsrmlsu" name="prjsrmlsu">
+				</div>
+			</div>
+		</div>
+
+		<div class="container container-2">
+			<h2>Plan Kısmı</h2>
+			<div class="form-row">
+				<div class="form-input">
+					<label for="onckialmtrh" asp-for="OncekiAlimTarihi">Önceki Alım Tarihi:</label>
+					<input required type="date" asp-for="OncekiAlimTarihi" id="onckialmtrh" name="onckialmtrh">
+				</div>
+				<div class="form-input">
+					<label for="onkcialmypnblge" asp-for="OncekiAlimBolge">Önceki Alım Yapan Bölge:</label>
+					<input required type="text" asp-for="OncekiAlimBolge" id="onkcialmypnblge" name="onkcialmypnblge">
+				</div>
+
+				<div class="form-input">
+					<label for="oncalmmktr" asp-for="OncekiAlimMiktar">Önceki Alım Miktarı:</label>
+					<input required type="number" asp-for="OncekiAlimMiktar" id="oncalmmktr" name="oncalmmktr">
+				</div>
+				<div class="form-input">
+					<label for="oncalmfyt" asp-for="OncekiAlimFiyat">Önceki Alım Fiyatı:</label>
+					<input required type="number" asp-for="OncekiAlimFiyat" id="oncalmfyt" name="oncalmfyt">
+				</div>
+				<div class="form-input">
+					<label for="ufe" asp-for="Ufe">ÜFE:</label>
+					<input required type="number" asp-for="Ufe" id="ufe" name="ufe">
+				</div>
+
+				<div class="form-input">
+					<label for="gnclbrmfyt" asp-for="GuncelBirimFiyat">Güncel Birim Fiyatı:</label>
+					<input required type="number" asp-for="GuncelBirimFiyat" id="gnclbrmfyt" name="gnclbrmfyt">
+				</div>
+				<div class="form-input">
+					<label for="gncltutr" asp-for="GuncelTutar">Güncel Tutar:</label>
+					<input required type="number" asp-for="GuncelTutar" id="gncltutr" name="gncltutr">
+				</div>
+			</div>
+		</div>
+
+		<div class="container container-3">
+			<h2>Lojistik Kısmı</h2>
+			<div class="form-row">
+
+				<div class="form-input">
+					<label for="mltslmtrh" asp-for="MalTeslimTarihi">Mal Teslim Tarihi:</label>
+					<input required type="date" asp-for="MalTeslimTarihi" id="mltslmtrh" name="mltslmtrh">
+				</div>
+				<div class="form-input">
+					<label for="mhtrtrh" asp-for="MuhtiraTarih">Muhtıra Tarihi:</label>
+					<input required type="date" asp-for="MuhtiraTarih" id="mhtrtrh" name="mhtrtrh">
+				</div>
+				<div class="form-input">
+					<label for="tsnrmlislmblgtrh" asp-for="TasinirkesilmeTarihi">Taşınır Mal İşlem Belgesi Tarihi:</label>
+					<input required type="date" asp-for="TasinirkesilmeTarihi" id="tsnrmlislmblgtrh" name="tsnrmlislmblgtrh">
+				</div>
+				<div class="form-input">
+					<label for="ikmmkzsvktrh" asp-for="IkmalSevkTarih">İkmal Merkezine Sevk Tarihi:</label>
+					<input required type="date" id="ikmmkzsvktrh" asp-for="IkmalSevkTarih" name="ikmmkzsvktrh">
+				</div>
+			</div>
+		</div>
+
+		<div class="container container-4">
+			<h2>Muayene Kısmı</h2>
+			<div class="form-row">
+				<div class="form-input">
+					<label for="mhtralmtrh" asp-for="MuhtiraAlimTarihi">Muhtıra Alım Tarihi:</label>
+					<input required type="date" asp-for="MuhtiraAlimTarihi" id="mhtralmtrh" name="mhtralmtrh">
+				</div>
+				<div class="form-input">
+					<label for="myntblgtrh" asp-for="MuaTebligTarihi">Muayene Tebliğ Tarihi:</label>
+					<input required type="date" asp-for="MuaTebligTarihi" id="myntblgtrh" name="myntblgtrh">
+				</div>
+				<div class="form-input">
+					<label for="mynbskn" asp-for="MuaKomisyonBaskani">Muayene Komisyonu Başkanı:</label>
+					<input required type="text" asp-for="MuaKomisyonBaskani" id="mynbskn" name="mynbskn">
+				</div>
+				<div class="form-input">
+					<label for="mynuye1" asp-for="MuaUye1">Muayene Üye 1:</label>
+					<input required type="text" asp-for="MuaUye1" id="mynuye1" name="mynuye1">
+				</div>
+				<div class="form-input">
+					<label for="mynuye2" asp-for="MuaUye2">Muayene Üye 2:</label>
+					<input required type="text" id="mynuye2" asp-for="MuaUye2" name="mynuye2">
+				</div>
+				<div class="form-input">
+					<label for="mynuye3" asp-for="MuaUye3">Muayene Üye 3:</label>
+					<input required type="text" id="mynuye3" asp-for="MuaUye3" name="mynuye3">
+				</div>
+				<div class="form-input">
+					<label for="mlsrmlsu" asp-for="MalSorumlusu">Mal Sorumlusu:</label>
+					<input required type="text" asp-for="MalSorumlusu" id="mlsrmlsu" name="mlsrmlsu">
+				</div>
+				<div class="form-input">
+					<label for="gckmesbebi" asp-for="GecikmeSebebi">Varsa Gecikme Sebebi:</label>
+					<input required type="text" asp-for="GecikmeSebebi" id="gckmesbebi" name="gckmesbebi">
+				</div>
+				<div class="form-input">
+					<label for="fzkmyntrh" asp-for="FizikselMuaTarih">Fiziksel Muayene Tarihi:</label>
+					<input required type="date" asp-for="FizikselMuaTarih" id="fzkmyntrh" name="fzkmyntrh">
+				</div>
+				<div class="form-input">
+					<label for="fzkmynsnc" asp-for="FizikselMuaSonuc">Fiziksel Muayene Sonucu:</label>
+					<input required type="text" asp-for="FizikselMuaSonuc" id="fzkmynsnc" name="fzkmynsnc">
+				</div>
+				<div class="form-input">
+					<label for="labgdstrh" asp-for="LabGidisTarihi">Labaratuvara Gidiş Tarihi:</label>
+					<input required type="date" asp-for="LabGidisTarihi" id="labgdstrh" name="labgdstrh">
+				</div>
+				<div class="form-input">
+					<label for="labdnstrh" asp-for="LabDonusTarihi">Labaratuvardan Dönüş Tarihi:</label>
+					<input required type="date" asp-for="LabDonusTarihi" id="labdnstrh" name="labdnstrh">
+				</div>
+
+				<div class="form-input">
+					<label for="mynkrrtrh" asp-for="MuakararTarihi">Muayene Karar Tarihi:</label>
+					<input required type="date" asp-for="MuakararTarihi" id="mynkrrtrh" name="mynkrrtrh">
+				</div>
+				<div class="form-input">
+					<label for="mynsnc" asp-for="MuaSonuc">Muayene Sonucu:</label>
+					<input required type="text" asp-for="MuaSonuc" id="mynsnc" name="mynsnc">
+				</div>
+				<div class="form-input">
+					<label for="mynaciklama" asp-for="MuaAciklamasi">Muayene Açıklaması:</label>
+					<input required type="text" asp-for="MuaAciklamasi" id="mynaciklama" name="mynaciklama">
+				</div>
+				<!-- Diğer 53 alan buraya eklenebilir -->
+			</div>
+		</div>
+		<button class="button" type="submit">
+			<div class="trash">
+				<div class="top">
+					<div class="paper"></div>
+				</div>
+				<div class="box"></div>
+				<div class="check">
+					<svg viewBox="0 0 8 6">
+						<polyline points="1 3.4 2.71428571 5 7 1"></polyline>
+					</svg>
+				</div>
+			</div>
+			<span>Kaydet</span>
+		</button>
+
+
+	</form>
+</body>
+
+
+<script src="~/js/button.js"></script> 
